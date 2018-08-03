@@ -65,8 +65,8 @@ public class Assets {
 		return new Texture(Gdx.files.internal(file));
 	}
 
-//	private static String prefix = "data\\";
-	private static String prefix = "";
+	private static String prefix = "data\\";
+//	private static String prefix = "";
 	public static void load () {
 		background = loadTexture(prefix+"background.png");
 		backgroundRegion = new TextureRegion(background, 0, 0, 320, 480);
