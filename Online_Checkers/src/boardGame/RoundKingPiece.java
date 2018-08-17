@@ -1,9 +1,6 @@
 package boardGame;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Rectangle;
-import java.awt.FontMetrics;
+import java.awt.*;
 
 public class RoundKingPiece extends Piece{
 	
@@ -48,7 +45,8 @@ public class RoundKingPiece extends Piece{
     	g.setColor(Color.BLACK);
     	g.fillOval(r.x, r.y, r.width, r.height);
     	
-    	// paints the round piece
+    	// paints the round king piece with a 'k' to differentiate it
+    	// from a regular round piece
     	Color oldColor = g.getColor();
         g.setColor(color);
         g.fillOval(r.x + 1, r.y + 1, r.width - 2, r.height - 2);
@@ -56,7 +54,8 @@ public class RoundKingPiece extends Piece{
         String k = "K";
         double textWidth = fm.getStringBounds(k, g).getWidth(); 
         g.setColor(Color.black);
-        g.drawString(k, (int)(r.x + textWidth*3),(int)(r.y + (fm.getMaxAscent()*2+3)));
+        g.setFont(new Font("Arial", Font.BOLD, 20));
+        g.drawString(k, (int)(r.x + textWidth*3-2),(int)(r.y + (fm.getMaxAscent()*2+7)));
         
         if (this.equals(board.getSelectedPiece())) {
             g.setColor(Color.RED);
