@@ -16,6 +16,8 @@ public class Checkers {
 		int numOfColumns = 8;
 		int numOfPlayerOnePieces = 12;
 		int numOfPlayerTwoPieces = 12;
+		String playerOne = "playerOne";
+		String playerTwo = "playerTwo";
 		JLabel playerOneLabel = new JLabel("PLAYER 1");
 		JLabel playerTwoLabel = new JLabel("PLAYER 2");
 		JPanel boardDisplayPanel;
@@ -35,14 +37,15 @@ public class Checkers {
 		boardDisplayPanel.setMinimumSize(new Dimension(450, 450));
 		boardDisplayPanel.setPreferredSize(new Dimension(450, 450));
 		
-		// Creating the 2 sets of Checkers pieces
+		// Creating the 2 sets of Checkers pieces and names them either
+		// "playerOne" or "playerTwo"
 		Piece[] playerOnePieces = new Piece[numOfPlayerOnePieces];
 		Piece[] playerTwoPieces = new Piece[numOfPlayerTwoPieces];
 		for(int i = 0; i < numOfPlayerOnePieces; i++){
-			playerOnePieces[i] = new RoundPiece(new Color(255, 255, 204));
+			playerOnePieces[i] = new RoundPiece(playerOne, new Color(255, 255, 204));
 		}
 		for(int i = 0; i < numOfPlayerTwoPieces; i++){
-			playerTwoPieces[i] = new RoundPiece(new Color(210, 180, 140));
+			playerTwoPieces[i] = new RoundPiece(playerTwo, new Color(210, 180, 140));
 		}
 	
 		// Setting the Checkers pieces onto the board
