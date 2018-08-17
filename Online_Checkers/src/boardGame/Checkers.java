@@ -16,8 +16,8 @@ public class Checkers {
 		int numOfColumns = 8;
 		int numOfPlayerOnePieces = 12;
 		int numOfPlayerTwoPieces = 12;
-		JLabel playerOneLabel = new JLabel("Player 1");
-		JLabel playerTwoLabel = new JLabel("Player 2");
+		JLabel playerOneLabel = new JLabel("PLAYER 1");
+		JLabel playerTwoLabel = new JLabel("PLAYER 2");
 		JPanel boardDisplayPanel;
 		JPanel leftPanel = new JPanel();
 		JPanel rightPanel = new JPanel();
@@ -44,10 +44,6 @@ public class Checkers {
 		for(int i = 0; i < numOfPlayerTwoPieces; i++){
 			playerTwoPieces[i] = new RoundPiece(new Color(210, 180, 140));
 		}
-		
-		Piece[] test = new Piece[1];
-		test[0] = new RoundKingPiece(new Color(210, 180, 140));
-		test[0].place(mainBoard, 0, 0);
 	
 		// Setting the Checkers pieces onto the board
 		playerOnePieces[0].place(mainBoard, 0, 1); playerOnePieces[1].place(mainBoard, 0, 3);
@@ -83,7 +79,6 @@ public class Checkers {
 		
 		leftPanel.setBorder(lowerEtched);		
 		gbcOne.weightx = 0.75;
-		gbcOne.weighty = 1.0;
 		gbcOne.gridx = 0;
 		gbcOne.gridy = 0;
 		gblOne.setConstraints(leftPanel, gbcOne);
@@ -91,7 +86,6 @@ public class Checkers {
 		
 		rightPanel.setBorder(lowerEtched);
 		gbcOne.weightx = 0.25;
-		gbcOne.weighty = 1.0;
 		gbcOne.gridx = 1;
 		gbcOne.gridy = 0;
 		gblOne.setConstraints(rightPanel, gbcOne);
@@ -100,22 +94,16 @@ public class Checkers {
 		leftPanel.setLayout(gblTwo);
 		gbcTwo.fill = GridBagConstraints.VERTICAL;
 		
-		gbcTwo.weighty = 0.10;
-		gbcTwo.weightx = 1.0;
 		gbcTwo.gridx = 0;
 		gbcTwo.gridy = 0;
 		gblTwo.setConstraints(playerOneLabel, gbcTwo);
 		leftPanel.add(playerOneLabel);
 		
-		gbcTwo.weighty = 0.80;
-		gbcTwo.weightx = 1.0;
 		gbcTwo.gridx = 0;
 		gbcTwo.gridy = 1;
 		gblTwo.setConstraints(boardDisplayPanel, gbcTwo);
 		leftPanel.add(boardDisplayPanel);
 		
-		gbcTwo.weighty = 0.10;
-		gbcTwo.weightx = 1.0;
 		gbcTwo.gridx = 0;
 		gbcTwo.gridy = 2;
 		gblTwo.setConstraints(playerTwoLabel, gbcTwo);
