@@ -24,6 +24,8 @@ public abstract class Piece extends Observable {
     private boolean moving = false;
     private boolean draggable = false;
     private boolean selectable = true;
+    private boolean regularPieceType = true;
+    private boolean kingPieceType = false;
     private int x;
     private int y;
     private int speed = -1; // Negative means to use board default
@@ -120,6 +122,24 @@ public abstract class Piece extends Observable {
      */
     public boolean isSelectable() {
         return selectable;
+    }
+    
+    /* Added by Kim:
+     * 		Returns 'true' for a regular Checkers piece.
+     * 
+     * 		@return 'true' if the piece is a regular Checkers piece.
+     */
+    public boolean isRegularPiece() {
+    	return regularPieceType;
+    }
+    
+    /* Added by Kim:
+     * 		Returns 'true' for a king Checkers piece.
+     * 
+     * 		@return 'true' if the piece is a king Checkers piece.
+     */
+    public boolean isKingPiece() {
+    	return kingPieceType;
     }
 
     /**

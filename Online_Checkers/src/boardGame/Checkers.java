@@ -44,6 +44,10 @@ public class Checkers {
 		for(int i = 0; i < numOfPlayerTwoPieces; i++){
 			playerTwoPieces[i] = new RoundPiece(new Color(210, 180, 140));
 		}
+		
+		Piece[] test = new Piece[1];
+		test[0] = new RoundKingPiece(new Color(210, 180, 140));
+		test[0].place(mainBoard, 0, 0);
 	
 		// Setting the Checkers pieces onto the board
 		playerOnePieces[0].place(mainBoard, 0, 1); playerOnePieces[1].place(mainBoard, 0, 3);
@@ -52,7 +56,7 @@ public class Checkers {
 		playerOnePieces[6].place(mainBoard, 1, 4); playerOnePieces[7].place(mainBoard, 1, 6);
 		playerOnePieces[8].place(mainBoard, 2, 1); playerOnePieces[9].place(mainBoard, 2, 3);
 		playerOnePieces[10].place(mainBoard, 2, 5); playerOnePieces[11].place(mainBoard, 2, 7);
-				
+		
 		playerTwoPieces[0].place(mainBoard, 5, 0); playerTwoPieces[1].place(mainBoard, 5, 2);
 		playerTwoPieces[2].place(mainBoard, 5, 4); playerTwoPieces[3].place(mainBoard, 5, 6);
 		playerTwoPieces[4].place(mainBoard, 6, 1); playerTwoPieces[5].place(mainBoard, 6, 3);
