@@ -1,16 +1,39 @@
+/*
+ * Author: Kimberly Ly
+ * Date: 	8/17/2018
+ * Updates: 8/19/2018 - Integrated this window into the overall application flow 
+ * 				(splash screen -> login screen -> main screen's "Start Game" -> checkers screen)
+ * Description: This window displays the Checkers game where both players are playing on.
+ */
 package boardGame;
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 import java.awt.*;
+import java.awt.event.*;
 
-public class Checkers {
+public class Checkers_Screen {
 
-	public static void main(String[] args) {
-		setUpGameWindowBoardAndPieces();
+	JFrame frame;
+	
+	public static void main(String args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Checkers_Screen window = new Checkers_Screen();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
-
-	public static void setUpGameWindowBoardAndPieces(){
+	
+	public Checkers_Screen(){
+		initialize();
+	}
+	
+	public void initialize(){
 		Board mainBoard;
 		int numOfRows = 8;
 		int numOfColumns = 8;
@@ -64,15 +87,58 @@ public class Checkers {
 		playerTwoPieces[10].place(mainBoard, 7, 4); playerTwoPieces[11].place(mainBoard, 7, 6);
 		
 		// Creating/setting up the main game window
-		JFrame mainFrame = new JFrame("Online Checkers");
-		mainFrame.setSize(700, 600);
+		frame = new JFrame("Online Checkers");
+		frame.setSize(700, 600);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		// Setting up the menu bar GUI
+		JMenuBar menuBar;
+		JMenu file, help;
+		JMenuItem exitGame, instructions, about;
+		
+		menuBar = new JMenuBar();
+		file = new JMenu("File");
+		file.setMnemonic(KeyEvent.VK_F);
+		menuBar.add(file);
+		exitGame = new JMenuItem("Exit", KeyEvent.VK_E);
+		file.add(exitGame);
+		
+		help = new JMenu("Help");
+		help.setMnemonic(KeyEvent.VK_H);
+		menuBar.add(help);
+		instructions = new JMenuItem("Instructions", KeyEvent.VK_I);
+		help.add(instructions);
+		about = new JMenuItem("About", KeyEvent.VK_A);
+		help.add(about);
+		
+		frame.setJMenuBar(menuBar);
+		
+		// Setting up the menu bar functionality
+		exitGame.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				frame.setVisible(false);
+				frame.dispose();
+			}
+		});
+		instructions.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				Instructions_Screen is = new Instructions_Screen();
+				is.frame.setVisible(true);
+			}
+		});
+		about.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				About_Screen as = new About_Screen();
+				as.frame.setVisible(true);
+			}
+		});
 		
 		/*
 		 * Setting up the components on the window:
 		 * 		Left Panel (which will contain 3 components) and the Right Panel 
 		 * 		(which will contain buttons)
 		 */
-		Container pane = mainFrame.getContentPane();
+		Container pane = frame.getContentPane();
 		GridBagLayout gblOne = new GridBagLayout();
 		GridBagLayout gblTwo = new GridBagLayout();
 		GridBagConstraints gbcOne = new GridBagConstraints();
@@ -115,6 +181,6 @@ public class Checkers {
 		forfeitButton.setFocusable(false);
 		rightPanel.add(forfeitButton);
 		
-		mainFrame.setVisible(true);
+		frame.setVisible(true);
 	}
 }

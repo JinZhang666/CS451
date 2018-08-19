@@ -23,7 +23,7 @@ public class Instructions_Screen {
 	/**
 	 * Launch the instructions screen.
 	 */
-	public static void main(String[] args) {
+	public static void main(String args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -49,7 +49,7 @@ public class Instructions_Screen {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		//Instructions Screen setup

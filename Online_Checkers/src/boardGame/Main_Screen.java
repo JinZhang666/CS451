@@ -17,7 +17,7 @@ public class Main_Screen {
 	/**
 	 * Launch the Window.
 	 */
-	public static void main(String[] args) {
+	public static void main(String args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -29,6 +29,7 @@ public class Main_Screen {
 			}
 		});
 	}
+	
 
 	/**
 	 * Create the Window.
@@ -56,6 +57,9 @@ public class Main_Screen {
 		JButton btnStartGame = new JButton("");
 		btnStartGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Checkers_Screen cs = new Checkers_Screen();
+				cs.frame.setVisible(true);
+				frame.dispose();
 			}
 		});
 		btnStartGame.setOpaque(false);

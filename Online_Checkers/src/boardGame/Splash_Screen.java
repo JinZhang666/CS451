@@ -1,6 +1,5 @@
 package boardGame;
 
-
 import java.awt.EventQueue;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
