@@ -8,29 +8,19 @@ public class Validation {
 	}
 	public static boolean isValidMove(Piece p, Board b, int r, int c)
 	{
-		int prow = p.getRow();
-		int pcol = p.getColumn();
 		if(p.isRegularPiece())
 		{
-			if(p.getName().equals("PlayerOne"))
+			if(isRegularMove(p, b, r, c))
 			{
-				//if moving diagonally forward -> down the column
-				if(isDiagonal(prow, pcol, r, c) && pcol > c)
-				{
-					return true;
-				}
-				else if(isValidRegularJump(p, b, r, c)) //check if the diagonal move was a valid jump;
-				{
-					return true;
-				}
-				else 
-				{
-					return false;
-				}
+				return true;
 			}
-			else if(p.getName().equals("PlayerTwo"))
+			else if(isValidRegularJump(p, b, r, c))
 			{
-				
+				return true;
+			}
+			else
+			{
+				return false;
 			}
 		}
 		return false;
@@ -45,7 +35,42 @@ public class Validation {
 	{
 		return (mrow == prow + 1 && mcol == pcol + 1) || (mrow == prow - 1 && mcol == pcol + 1) || (mrow == prow + 1 && mcol == pcol - 1) || (mrow == prow - 1 && mcol == pcol - 1);
 	}
-	
+	/*
+	 * isRegularMove: Piece * Board * int * int -> bool
+	 * REQUIRES: Piece != NULL, Board != NULL, move coordinates within bounds
+	 * ENSURES: returns true if the move coordinates are a valid regular piece move
+	 * */
+	public static boolean isRegularMove(Piece p, Board b, int r, int c)
+	{
+		int prow = p.getRow();
+		int pcol = p.getColumn();
+		if(!isDiagonal(prow, pcol, r, c))
+		{
+			return false;
+		}
+		else
+		{
+			//check if move location is empty
+			Piece moveloc = b.getPiece(r, c);
+			if(moveloc != null)
+			{
+				return false;
+			}
+			//check if movement is valid for specific player
+			if(p.getName().equals("PlayerOne")) //check if piece moving "down" the board (up the column number)
+			{
+				return pcol < c;
+			}
+			else if(p.getName().equals("PlayerTwo")) //check if piece moving "up" the board (down the column number)
+			{
+				return pcol > c;
+			}
+			else
+			{
+				return false;
+			}
+		}
+	}
 	/*
 	 * isJumpCoord: int * int * int * int -> bool
 	 * REQUIRES: all inputs are in the board bounds
@@ -62,7 +87,7 @@ public class Validation {
 	 * REQUIRES: Board b != NULL, Piece p != NULL, mrow, mcol are within the bounds of the board.  
 	 * ENSURES: returns true if the move is a proper regular jump, otherwise, return false
 	 * */
-	private static boolean isValidRegularJump(Piece p, Board b, int mrow, int mcol)
+	public static boolean isValidRegularJump(Piece p, Board b, int mrow, int mcol)
 	{
 		int prow = p.getRow();
 		int pcol = p.getColumn();
@@ -82,6 +107,11 @@ public class Validation {
 			{
 				capture = b.getPiece(mrow + 1, mcol - 1);
 			}
+			//check if capture piece is actually a player piece
+			if(capture == null)
+			{
+				return false;
+			}
 			//Check if capture piece belongs to Playertwo
 			if(!capture.getName().equals("PlayerTwo"))
 			{
@@ -89,7 +119,7 @@ public class Validation {
 			}
 			//check if the piece on the board where the player will move is empty
 			Piece jump = b.getPiece(mrow, mcol);
-			if(jump != null || jump.isRegularPiece())
+			if(jump != null)
 			{
 				return false;
 			}
@@ -110,6 +140,11 @@ public class Validation {
 			else
 			{
 				capture = b.getPiece(mrow + 1, mcol + 1);
+			}
+			//check if capture piece is actually a player piece
+			if(capture == null)
+			{
+				return false;
 			}
 			//Check if capture piece belongs to PlayerOne
 			if(!capture.getName().equals("PlayerOne"))
