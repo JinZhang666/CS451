@@ -28,7 +28,25 @@ public class Validation {
 				return false;
 			}
 		}
-		return false;
+		else if(p.isKingPiece())
+		{
+			if(isKingMove(p, b, r, c))
+			{
+				return true;
+			}
+			else if(isValidKingJump(p, b, r, c))
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		else
+		{
+			return false;
+		}
 	}
 	
 	/*
@@ -114,25 +132,25 @@ public class Validation {
 	 * REQUIRES: Board b != NULL, Piece p != NULL, mrow, mcol are within the bounds of the board.  
 	 * ENSURES: returns true if the move is a proper regular jump, otherwise, return false
 	 * */
-	public static boolean isValidRegularJump(Piece p, Board b, int mrow, int mcol)
+	public static boolean isValidRegularJump(Piece p, Board b, int r, int c)
 	{
 		int prow = p.getRow();
 		int pcol = p.getColumn();
 		if(p.getName().equals("PlayerOne")) //their pieces go DOWN (aka + numbers)
 		{
-			if(!isJumpCoord(prow, pcol, mrow, mcol) || mcol < pcol) //if piece is not moving "down" (move is < current pos)
+			if(!isJumpCoord(prow, pcol, r, c) || r < c) //if piece is not moving "down" (move is < current pos)
 			{
 				return false;
 			}
 			//get the captured piece
 			Piece capture;
-			if(mrow > prow)
+			if(r > prow)
 			{
-				capture = b.getPiece(mrow -1, mcol - 1);
+				capture = b.getPiece(r -1, c - 1);
 			}
 			else
 			{
-				capture = b.getPiece(mrow + 1, mcol - 1);
+				capture = b.getPiece(r + 1, c - 1);
 			}
 			//check if capture piece is actually a player piece
 			if(capture == null)
@@ -145,7 +163,7 @@ public class Validation {
 				return false;
 			}
 			//check if the piece on the board where the player will move is empty
-			Piece jump = b.getPiece(mrow, mcol);
+			Piece jump = b.getPiece(r, c);
 			if(jump != null)
 			{
 				return false;
@@ -154,19 +172,19 @@ public class Validation {
 		}
 		else if(p.getName().equals("PlayerTwo"))//player == playerTwo
 		{
-			if(!isJumpCoord(prow, pcol, mrow, mcol) || mcol > pcol) //if piece is not moving "up" (move is > current pos)
+			if(!isJumpCoord(prow, pcol, r, c) ||c > pcol) //if piece is not moving "up" (move is > current pos)
 			{
 				return false;
 			}
 			//get the captured piece
 			Piece capture;
-			if(mrow > prow)
+			if(r > prow)
 			{
-				capture = b.getPiece(mrow - 1, mcol + 1);
+				capture = b.getPiece(r - 1, c + 1);
 			}
 			else
 			{
-				capture = b.getPiece(mrow + 1, mcol + 1);
+				capture = b.getPiece(r + 1, c + 1);
 			}
 			//check if capture piece is actually a player piece
 			if(capture == null)
@@ -179,7 +197,7 @@ public class Validation {
 				return false;
 			}
 			//check if the piece on the board where the player will move is empty
-			Piece jump = b.getPiece(mrow, mcol);
+			Piece jump = b.getPiece(r, c);
 			if(jump != null)
 			{
 				return false;
@@ -187,6 +205,63 @@ public class Validation {
 			return true;
 		}
 		else //the input piece belongs to neither the playerOne or PlayerTwo
+		{
+			return false;
+		}
+	}
+	
+	public static boolean isValidKingJump(Piece p, Board b, int r, int c)
+	{
+		int prow = p.getRow();
+		int pcol = p.getColumn();
+		if(!isJumpCoord(prow, pcol, r, c)) //if piece is not moving "up" (move is > current pos)
+		{
+			return false;
+		}
+		//check if move location is empty
+		Piece moveloc = b.getPiece(r, c);
+		if(moveloc != null)
+		{
+			return false;
+		}
+		//get captured piece
+		Piece capture;
+		if(r > prow && c > pcol)
+		{
+			capture = b.getPiece(r - 1, c - 1);
+		}
+		else if(r > prow && c < pcol)
+		{
+			capture = b.getPiece(r - 1,	c + 1);
+		}
+		else if(r < prow  && c > pcol)
+		{
+			capture = b.getPiece(r + 1, c - 1);
+		}
+		else if(r < prow && c < pcol)
+		{
+			capture = b.getPiece(r + 1, c + 1);
+		}
+		else
+		{
+			//isJumpCoord does not work
+			return false;
+		}
+		//check if capture piece is empty
+		if(capture == null)
+		{
+			return false;
+		}
+		//Check if players are different
+		if(p.getName().equals("PlayerOne"))
+		{
+			return capture.getName().equals("PlayerTwo");
+		}
+		else if(p.getName().equals("PlayerTwo"))
+		{
+			return capture.getName().equals("PlayerOne");
+		}
+		else
 		{
 			return false;
 		}
