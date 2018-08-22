@@ -2,9 +2,79 @@ package boardGame;
 
 public class Validation {
 	
-	public static boolean canMakeJump(Piece p, Board b, int r, int c)
+	public static boolean canMakeJump(Piece p, Board b)
 	{
 		return false;
+	}
+	
+	public static boolean canMakeKingJump(Piece p, Board b)
+	{
+		int r = p.getRow();
+		int c = p.getColumn();
+		int boundr = b.getRows();
+		int boundc = b.getColumns();
+		Piece NWPiece;
+		Piece NEPiece;
+		Piece SWPiece;
+		Piece SEPiece;
+		Piece NWCap;
+		Piece NECap;
+		Piece SWCap;
+		Piece SECap;
+		if(r - 2 >= 0 && c - 2 >= 0)
+		{
+			NWPiece = b.getPiece(r - 2, c - 2);
+			if(NWPiece != null) //check if move location is empty
+			{
+				NWCap = b.getPiece(r - 1, c - 1);
+				//check if NWcapture piece has different player
+				if(!NWCap.getName().equals(p.getName()))
+				{
+					return true;
+				}
+			}
+		}
+		if(r + 2 < boundr && c - 2 >= 0)
+		{
+			NEPiece = b.getPiece(r + 2, c - 2);
+			if(NEPiece != null) //check if move location is empty
+			{
+				NECap = b.getPiece(r + 1, c - 1);
+				//check if NECap piece has different player
+				if(!NECap.getName().equals(p.getName()))
+				{
+					return true;
+				}
+			}
+		}
+		if(r - 2 >= 0 && c + 2 < boundc)
+		{
+			SWPiece = b.getPiece(r - 2, c + 2);
+			if(SWPiece != null)
+			{
+				SWCap = b.getPiece(r - 1, c + 1);
+				//check if SWCap piece has different player
+				if(!SWCap.getName().equals(p.getName()))
+				{
+					return true;
+				}
+			}
+		}
+		if(r + 2 < boundr && c + 2 < boundc)
+		{
+			SEPiece = b.getPiece(r + 2, c + 2);
+			if(SEPiece != null)
+			{
+				SECap = b.getPiece(r + 1, c + 1);
+				//check if SECap piece has different player
+				if(!SECap.getName().equals(p.getName()))
+				{
+					return true;
+				}
+			}
+		}
+		return false;
+
 	}
 	public static boolean isValidMove(Piece p, Board b, int r, int c)
 	{
