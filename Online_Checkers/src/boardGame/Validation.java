@@ -8,6 +8,11 @@ public class Validation {
 	}
 	public static boolean isValidMove(Piece p, Board b, int r, int c)
 	{
+		//check if entered values are fine
+		if(p == null || b == null || 0 > r || 0 > c || b.getColumns() < c || b.getRows() < r)
+		{
+			return false;
+		}
 		if(p.isRegularPiece())
 		{
 			if(isRegularMove(p, b, r, c))
@@ -69,6 +74,28 @@ public class Validation {
 			{
 				return false;
 			}
+		}
+	}
+	
+	/*
+	 * isKingMove: Piece * Board * int * int -> bool
+	 * REQUIRES: Piece != NULL, Board != NULL, move coordinates within bounds
+	 * ENSURES: returns true if the move coordinates are a valid King piece move
+	 * */
+	public static boolean isKingMove(Piece p, Board b, int r, int c)
+	{
+		int prow = p.getRow();
+		int pcol = p.getColumn();
+		if(!isDiagonal(prow, pcol, r, c))
+		{
+			return false;
+		}
+		else
+		{
+			//check if move location is empty
+			Piece moveloc = b.getPiece(r, c);
+			return moveloc == null;
+			//King can move forward or back, so this is sufficient
 		}
 	}
 	/*
