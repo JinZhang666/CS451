@@ -222,11 +222,11 @@ public class Validation {
 			//check if movement is valid for specific player
 			if(p.getName().equals("PlayerOne")) //check if piece moving "down" the board (up the column number)
 			{
-				return pcol < c;
+				return prow < r;
 			}
 			else if(p.getName().equals("PlayerTwo")) //check if piece moving "up" the board (down the column number)
 			{
-				return pcol > c;
+				return prow > r;
 			}
 			else
 			{
@@ -278,19 +278,19 @@ public class Validation {
 		int pcol = p.getColumn();
 		if(p.getName().equals("PlayerOne")) //their pieces go DOWN (aka + numbers)
 		{
-			if(!isJumpCoord(prow, pcol, r, c) || r < c) //if piece is not moving "down" (move is < current pos)
+			if(!isJumpCoord(prow, pcol, r, c) || r < prow) //if piece is not moving "down" (move is < current pos)
 			{
 				return false;
 			}
 			//get the captured piece
 			Piece capture;
-			if(r > prow)
+			if(c > pcol)
 			{
-				capture = b.getPiece(r -1, c - 1);
+				capture = b.getPiece(r - 1, c - 1);
 			}
 			else
 			{
-				capture = b.getPiece(r + 1, c - 1);
+				capture = b.getPiece(r - 1, c + 1);
 			}
 			//check if capture piece is actually a player piece
 			if(capture == null)
@@ -312,15 +312,15 @@ public class Validation {
 		}
 		else if(p.getName().equals("PlayerTwo"))//player == playerTwo
 		{
-			if(!isJumpCoord(prow, pcol, r, c) ||c > pcol) //if piece is not moving "up" (move is > current pos)
+			if(!isJumpCoord(prow, pcol, r, c) ||r > prow) //if piece is not moving "up" (move is > current pos)
 			{
 				return false;
 			}
 			//get the captured piece
 			Piece capture;
-			if(r > prow)
+			if(c > pcol)
 			{
-				capture = b.getPiece(r - 1, c + 1);
+				capture = b.getPiece(r + 1, c - 1);
 			}
 			else
 			{
