@@ -31,13 +31,13 @@ public class Validation {
 					}
 				}
 			}
-			if(r + 2 < boundr && c - 2 >= 0)
+			if(r + 2 < boundr && c + 2 < boundc)
 			{
-				NEPiece = b.getPiece(r + 2, c - 2);
-				if(NEPiece != null) //check if move location is empty
+				NEPiece = b.getPiece(r + 2, c + 2);
+				if(NEPiece != null)
 				{
-					NECap = b.getPiece(r + 1, c - 1);
-					//check if NECap piece has different player
+					NECap = b.getPiece(r + 1, c + 1);
+					//check if SECap piece has different player
 					if(!NECap.getName().equals(p.getName()))
 					{
 						return true;
@@ -60,13 +60,13 @@ public class Validation {
 					}
 				}
 			}
-			if(r + 2 < boundr && c + 2 < boundc)
+			if(r + 2 < boundr && c - 2 >= 0)
 			{
-				SEPiece = b.getPiece(r + 2, c + 2);
-				if(SEPiece != null)
+				SEPiece = b.getPiece(r + 2, c - 2);
+				if(SEPiece != null) //check if move location is empty
 				{
-					SECap = b.getPiece(r + 1, c + 1);
-					//check if SECap piece has different player
+					SECap = b.getPiece(r + 1, c - 1);
+					//check if NECap piece has different player
 					if(!SECap.getName().equals(p.getName()))
 					{
 						return true;
@@ -106,12 +106,12 @@ public class Validation {
 		}
 		if(r + 2 < boundr && c - 2 >= 0)
 		{
-			NEPiece = b.getPiece(r + 2, c - 2);
-			if(NEPiece != null) //check if move location is empty
+			SEPiece = b.getPiece(r + 2, c - 2);
+			if(SEPiece != null) //check if move location is empty
 			{
-				NECap = b.getPiece(r + 1, c - 1);
+				SECap = b.getPiece(r + 1, c - 1);
 				//check if NECap piece has different player
-				if(!NECap.getName().equals(p.getName()))
+				if(!SECap.getName().equals(p.getName()))
 				{
 					return true;
 				}
@@ -132,12 +132,12 @@ public class Validation {
 		}
 		if(r + 2 < boundr && c + 2 < boundc)
 		{
-			SEPiece = b.getPiece(r + 2, c + 2);
-			if(SEPiece != null)
+			NEPiece = b.getPiece(r + 2, c + 2);
+			if(NEPiece != null)
 			{
-				SECap = b.getPiece(r + 1, c + 1);
+				NECap = b.getPiece(r + 1, c + 1);
 				//check if SECap piece has different player
-				if(!SECap.getName().equals(p.getName()))
+				if(!NECap.getName().equals(p.getName()))
 				{
 					return true;
 				}
@@ -220,11 +220,11 @@ public class Validation {
 				return false;
 			}
 			//check if movement is valid for specific player
-			if(p.getName().equals("PlayerOne")) //check if piece moving "down" the board (up the column number)
+			if(p.getName().equals("PlayerOne")) //check if piece moving "down" the board (up the row number)
 			{
 				return prow < r;
 			}
-			else if(p.getName().equals("PlayerTwo")) //check if piece moving "up" the board (down the column number)
+			else if(p.getName().equals("PlayerTwo")) //check if piece moving "up" the board (down the row number)
 			{
 				return prow > r;
 			}
