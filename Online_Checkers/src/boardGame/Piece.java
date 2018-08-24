@@ -22,7 +22,7 @@ public abstract class Piece extends Observable {
     private int row = -1;  // -1 means not on any board
     private int column = -1;
     private boolean moving = false;
-    private boolean draggable = false;
+    private boolean draggable = true;
     private boolean selectable = true;
     private boolean regularPieceType = true;
     private boolean kingPieceType = false;
@@ -420,6 +420,7 @@ public abstract class Piece extends Observable {
      * @return <code>true</code> if the move can be made.
      */
     public final boolean canMove(int deltaRow, int deltaColumn) {
+
         return canMoveTo(row + deltaRow, column + deltaColumn);
     }
     
@@ -488,7 +489,7 @@ public abstract class Piece extends Observable {
      */
     static final class MouseDragger extends MouseAdapter {
         private Board board;
-
+        Piece selected;
         /**
          * Constructor for a MouseDragger on the given board.
          * @param board The board to which this MouseDragger applies.
@@ -508,6 +509,7 @@ public abstract class Piece extends Observable {
         public void mousePressed(MouseEvent e) {
             board.setSelectedSquare(board.yToRow(e.getY()), board.xToColumn(e.getX()));
             Piece chosenPiece = board.findPiece(e.getX(), e.getY());
+            selected = chosenPiece;
             if (chosenPiece == null){
                 return;
             }
@@ -578,8 +580,8 @@ public abstract class Piece extends Observable {
                     + board.getCellHeight() / 2);
             int newColumn = board.xToColumn(pieceBeingDragged.x
                     + board.getCellWidth() / 2);
-
-            if (pieceBeingDragged.canMoveTo(newRow, newColumn)) {
+            System.out.printf("Move from %d %d to %d %d", selected.getRow(), selected.getColumn(), newRow, newColumn);
+            if (pieceBeingDragged.canMoveTo(newRow, newColumn) && Validation.isValidMove(selected, board, newRow, newColumn)) {
                 pieceBeingDragged.changePosition(newRow, newColumn);
             }
             pieceBeingDragged.moving = false;
