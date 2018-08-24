@@ -24,8 +24,8 @@ public abstract class Piece extends Observable {
     private boolean moving = false;
     private boolean draggable = true;
     private boolean selectable = true;
-    private boolean regularPieceType = true;
-    private boolean kingPieceType = false;
+    protected boolean regularPieceType = true;
+    protected boolean kingPieceType = false;
     private int x;
     private int y;
     private int speed = -1; // Negative means to use board default

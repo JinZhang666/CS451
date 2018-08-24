@@ -153,6 +153,7 @@ public class Validation {
 		{
 			return false;
 		}
+		System.out.println(p.isKingPiece());
 		if(p.isRegularPiece())
 		{
 			if(isRegularMove(p, b, r, c))
@@ -219,7 +220,6 @@ public class Validation {
 			{
 				return false;
 			}
-			System.out.println(p.getName());
 			//check if movement is valid for specific player
 			if(p.getName().equals("playerOne")) //check if piece moving "down" the board (up the row number)
 			{
