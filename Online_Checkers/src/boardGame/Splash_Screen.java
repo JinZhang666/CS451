@@ -66,8 +66,9 @@ public class Splash_Screen {
 				frame.dispose();
 			}
 		});
-		frame.getContentPane().setLayout(null);
 		btnEnterGame.setBounds(458, 235, 200, 49);
+		
+		frame.getContentPane().setLayout(null);
 		frame.getContentPane().add(btnEnterGame);
 		frame.getContentPane().add(splash);
 	}
