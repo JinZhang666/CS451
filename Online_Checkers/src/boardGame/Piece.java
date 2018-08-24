@@ -580,13 +580,8 @@ public abstract class Piece extends Observable {
                     + board.getCellHeight() / 2);
             int newColumn = board.xToColumn(pieceBeingDragged.x
                     + board.getCellWidth() / 2);
-            /*
             System.out.printf("Move from %d %d to %d %d", selected.getRow(), selected.getColumn(), newRow, newColumn);
             if (pieceBeingDragged.canMoveTo(newRow, newColumn) && Validation.isValidMove(selected, board, newRow, newColumn)) {
-                pieceBeingDragged.changePosition(newRow, newColumn);
-            }
-            */
-            if (pieceBeingDragged.canMoveTo(newRow, newColumn)) {
                 pieceBeingDragged.changePosition(newRow, newColumn);
             }
             pieceBeingDragged.moving = false;

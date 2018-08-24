@@ -74,10 +74,8 @@ public class Instructions_Screen {
 		btnInstrucToMain.setBounds(232, 165, 39, 37);
 		
 		JTextArea instructions_text = new JTextArea(5, 200);
-		instructions_text.setOpaque(false);
 		instructions_text.setEditable(false);
 		JScrollPane scrollPane = new JScrollPane(instructions_text);
-		scrollPane.setOpaque(false);
 		scrollPane.setBounds(181, 232, 378, 348);
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.setPreferredSize(new Dimension(222, 160));
@@ -93,7 +91,9 @@ public class Instructions_Screen {
 			}
 		instructions_text.setLineWrap(true);
 		instructions_text.setWrapStyleWord(true);
+		//instructions_text.setBounds(112, 105, 222, 160);
 		
+		//frame.getContentPane().add(instructions_text);
 		frame.getContentPane().add(scrollPane);
 		frame.getContentPane().add(btnInstrucToMain);
 		frame.getContentPane().add(instructions);
