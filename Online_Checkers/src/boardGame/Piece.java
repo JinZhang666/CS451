@@ -1,21 +1,3 @@
-Skip to content
- 
-Search or jump to…
-
-Pull requests
-Issues
-Marketplace
-Explore
- @mzhong1 Sign out
-2
-0 0 JinZhang666/CS451
- Code  Issues 4  Pull requests 0  Projects 0  Wiki  Insights
-CS451/Online_Checkers/src/boardGame/Piece.java
-fc6f2d3  39 minutes ago
-@kl689 kl689 Created setUpBoard method and start on the playGame method
-@kl689 @mzhong1
-      
-625 lines (571 sloc)  19 KB
 package boardGame;
 import java.awt.Graphics;
 import java.awt.Rectangle;
@@ -641,16 +623,3 @@ public abstract class Piece extends Observable {
                            selectable + ", moving = " + moving);
     }
 }
-© 2018 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Help
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
-Press h to open a hovercard with more details.
