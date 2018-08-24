@@ -15,6 +15,12 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import java.awt.Font;
+import javax.swing.JTextPane;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 
 public class About_Screen {
 
@@ -53,12 +59,13 @@ public class About_Screen {
 		
 		//About Screen setup
 		JLabel about = new JLabel("");
+		about.setFont(new Font("American Typewriter", Font.PLAIN, 16));
 		about.setBounds(0, 0, 750, 603);
 		Image a = new ImageIcon(this.getClass().getResource("/about_screen.png")).getImage();
 		Image a1 = a.getScaledInstance(about.getWidth(), about.getHeight(), Image.SCALE_SMOOTH);
 		ImageIcon a2 = new ImageIcon(a1);
 		about.setIcon(a2);
-		
+
 		JButton btnAboutToMain = new JButton("");
 		btnAboutToMain.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -67,13 +74,69 @@ public class About_Screen {
 				frame.dispose();
 			}
 		});
+		
 		btnAboutToMain.setOpaque(false);
 		btnAboutToMain.setContentAreaFilled(false);
 		btnAboutToMain.setBorderPainted(false);
-		btnAboutToMain.setBounds(167, 73, 27, 29);
-
-		frame.getContentPane().add(btnAboutToMain);
+		btnAboutToMain.setBounds(274, 166, 48, 42);
+		
+		JTextArea txtrClientVersion = new JTextArea();
+		txtrClientVersion.setFont(new Font("American Typewriter", Font.PLAIN, 16));
+		txtrClientVersion.setOpaque(false);
+		txtrClientVersion.setEditable(false);
+		txtrClientVersion.setText("Client Version:");
+		txtrClientVersion.setBounds(311, 266, 112, 26);
+		
+		JTextPane txtVersion = new JTextPane();
+		txtVersion.setOpaque(false);
+		txtVersion.setEditable(false);
+		txtVersion.setBounds(311, 294, 112, 26);
+		try {
+			FileReader in = new FileReader("data/version.txt");
+			BufferedReader br = new BufferedReader(in);
+			txtVersion.read(br, null);
+			br.close();
+			txtVersion.requestFocus();
+		}
+			catch(Exception e) {
+				JOptionPane.showMessageDialog(null, "Instructions not available");
+			}
+        SimpleAttributeSet attrs=new SimpleAttributeSet();
+        StyleConstants.setAlignment(attrs,StyleConstants.ALIGN_CENTER);
+        StyledDocument version = (StyledDocument)txtVersion.getDocument();
+        version.setParagraphAttributes(0,version.getLength()-1,attrs,false);
+		
+		JTextArea txtrPatchLog = new JTextArea();
+		txtrPatchLog.setFont(new Font("American Typewriter", Font.PLAIN, 16));
+		txtrPatchLog.setOpaque(false);
+		txtrPatchLog.setText("Patch Log: ");
+		txtrPatchLog.setBounds(328, 343, 83, 27);
+		
+		JTextPane txtLog = new JTextPane();
+		txtLog.setOpaque(false);
+		txtLog.setEditable(false);
+		txtLog.setBounds(274, 373, 190, 118);
+		try {
+			FileReader in = new FileReader("data/log.txt");
+			BufferedReader br = new BufferedReader(in);
+			txtLog.read(br, null);
+			br.close();
+			txtLog.requestFocus();
+		}
+			catch(Exception e) {
+				JOptionPane.showMessageDialog(null, "Instructions not available");
+			}
+        SimpleAttributeSet attrs2 = new SimpleAttributeSet();
+        StyleConstants.setAlignment(attrs2,StyleConstants.ALIGN_CENTER);
+        StyledDocument log=(StyledDocument)txtLog.getDocument();
+        log.setParagraphAttributes(0,log.getLength()-1,attrs2,false);
+        
+        frame.getContentPane().setLayout(null);
+        frame.getContentPane().add(btnAboutToMain);
+        frame.getContentPane().add(txtrClientVersion);
+        frame.getContentPane().add(txtVersion);
+        frame.getContentPane().add(txtrPatchLog);
+		frame.getContentPane().add(txtLog);
 		frame.getContentPane().add(about);
 	}
-
 }

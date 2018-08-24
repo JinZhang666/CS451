@@ -91,9 +91,7 @@ public class In_Game_Instructions_Screen {
 			}
 		instructions_text.setLineWrap(true);
 		instructions_text.setWrapStyleWord(true);
-		//instructions_text.setBounds(112, 105, 222, 160);
 		
-		//frame.getContentPane().add(instructions_text);
 		frame.getContentPane().add(scrollPane);
 		frame.getContentPane().add(btnInstrucToMain);
 		frame.getContentPane().add(instructions);
