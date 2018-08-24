@@ -122,7 +122,7 @@ public class Checkers_Screen {
 		});
 		instructions.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				Instructions_Screen is = new Instructions_Screen();
+				In_Game_Instructions_Screen is = new In_Game_Instructions_Screen();
 				is.frame.setVisible(true);
 			}
 		});

@@ -48,12 +48,12 @@ public class About_Screen {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 750, 625);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		//About Screen setup
 		JLabel about = new JLabel("");
-		about.setBounds(0, 0, 450, 278);
+		about.setBounds(0, 0, 750, 603);
 		Image a = new ImageIcon(this.getClass().getResource("/about_screen.png")).getImage();
 		Image a1 = a.getScaledInstance(about.getWidth(), about.getHeight(), Image.SCALE_SMOOTH);
 		ImageIcon a2 = new ImageIcon(a1);

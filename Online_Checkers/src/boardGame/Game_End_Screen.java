@@ -39,12 +39,12 @@ public class Game_End_Screen {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 750, 625);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		//Game End Screen setup
 		JLabel end = new JLabel("");
-		end.setBounds(0, 0, 450, 278);
+		end.setBounds(0, 0, 750, 603);
 		Image e = new ImageIcon(this.getClass().getResource("/game_end_screen.png")).getImage();
 		Image e1 = e.getScaledInstance(end.getWidth(), end.getHeight(), Image.SCALE_SMOOTH);
 		ImageIcon e2 = new ImageIcon(e1);
