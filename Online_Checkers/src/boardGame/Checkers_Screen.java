@@ -37,8 +37,8 @@ public class Checkers_Screen {
 	int numOfRows = 8;
 	int numOfColumns = 8;
 	static final int numOfPlayerPieces = 12;
-	String playerOne = "PlayerOne";
-	String playerTwo = "PlayerTwo";
+	String playerOne = "playerOne";
+	String playerTwo = "playerTwo";
 	static Piece[] playerOnePieces = new Piece[numOfPlayerPieces];
 	static Piece[] playerTwoPieces = new Piece[numOfPlayerPieces];
 	JLabel playerOneLabel = new JLabel("PLAYER 1");
