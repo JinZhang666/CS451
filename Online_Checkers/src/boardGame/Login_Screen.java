@@ -10,11 +10,13 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import java.awt.Font;
 
 
 public class Login_Screen {
 
 	JFrame frame;
+	private JTextField txtHghs;
 
 	/**
 	 * Launch the login screen.
@@ -44,7 +46,7 @@ public class Login_Screen {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 750, 625);
+		frame.setBounds(300, 0, 750, 625);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
@@ -56,11 +58,9 @@ public class Login_Screen {
 		ImageIcon l2 = new ImageIcon(l1);
 		login.setIcon(l2);
 		
-		JTextField textField = new JTextField();
-		textField.setOpaque(false);
-		textField.setBounds(447, 195, 229, 71);
-		frame.getContentPane().add(textField);
-		textField.setColumns(10);
+		JTextField txtName = new JTextField();
+		txtName.setFont(new Font("American Typewriter", Font.PLAIN, 28));
+		txtName.setBounds(452, 196, 221, 66);
 		
 		JButton btnConfirm = new JButton("");
 		btnConfirm.addActionListener(new ActionListener() {
@@ -70,16 +70,16 @@ public class Login_Screen {
 				frame.dispose();
 			}
 		});
+		
 		btnConfirm.setOpaque(false);
 		btnConfirm.setContentAreaFilled(false);
 		btnConfirm.setBorderPainted(false);
 		btnConfirm.setBounds(548, 309, 117, 37);
 		
+		frame.getContentPane().add(txtName);
 		frame.getContentPane().add(btnConfirm);
 		frame.getContentPane().add(login);
 	
 		
 	}
-	
-
 }

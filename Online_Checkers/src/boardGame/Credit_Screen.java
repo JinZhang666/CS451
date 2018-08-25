@@ -44,7 +44,7 @@ public class Credit_Screen {
 		
 		//Credit Screen setup
 		JLabel credit = new JLabel("");
-		credit.setBounds(0, 0, 750, 603);
+		credit.setBounds(300, 0, 750, 603);
 		Image c = new ImageIcon(this.getClass().getResource("/credits_screen.png")).getImage();
 		Image c1 = c.getScaledInstance(credit.getWidth(), credit.getHeight(), Image.SCALE_SMOOTH);
 		ImageIcon c2 = new ImageIcon(c1);

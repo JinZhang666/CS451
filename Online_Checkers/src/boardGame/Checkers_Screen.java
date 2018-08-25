@@ -111,7 +111,8 @@ public class Checkers_Screen {
 		
 		// Creating/setting up the main game window
 		frame = new JFrame("Online Checkers");
-		frame.setSize(700, 600);
+		//frame.setSize(700, 600);
+		frame.setBounds(300, 0, 750, 625);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		// Setting up the menu bar GUI
@@ -145,13 +146,13 @@ public class Checkers_Screen {
 		});
 		instructions.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				Instructions_Screen is = new Instructions_Screen();
+				In_Game_Instructions_Screen is = new In_Game_Instructions_Screen();
 				is.frame.setVisible(true);
 			}
 		});
 		about.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				About_Screen as = new About_Screen();
+				In_Game_About_Screen as = new In_Game_About_Screen();
 				as.frame.setVisible(true);
 			}
 		});
