@@ -225,19 +225,13 @@ public class Checkers_Screen {
 			mainBoard.dragEvent.addObserver(new Observer() {
 				@Override
 				public void update(Observable o, Object arg) {
+					System.out.println("moved from [" + mainBoard.getSelectedR() + "][" + mainBoard.getSelectedC() + "]");
 					System.out.println(arg);
-				//	System.out.println("one");
-					//playGame(2);
-			    }
-			});
-			
-			mainBoard.dragEvent.addObserver(new Observer() {
-				@Override
-				public void update(Observable o, Object arg) {
 					System.out.println("one");
 					playGame(2);
 			    }
 			});
+			
 		}
 		
 		if(player == 2){
@@ -250,17 +244,11 @@ public class Checkers_Screen {
 				@Override
 				public void update(Observable o, Object arg) {
 					System.out.println(arg);
-					//System.out.println("two");
-					//playGame(1);
-			    }
-			});
-			mainBoard.dragEvent.addObserver(new Observer() {
-				@Override
-				public void update(Observable o, Object arg) {
 					System.out.println("two");
 					playGame(1);
 			    }
 			});
+
 		}
     }
 }
