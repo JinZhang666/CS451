@@ -24,6 +24,8 @@ import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -68,7 +70,7 @@ public class Checkers_Screen {
 	public Checkers_Screen(){
 		setUpBoard(mainBoard);
 		initialize();
-		playGame();
+		playGame(currentPlayer);
 	}
 	
 	public void setUpBoard(Board b){
@@ -208,22 +210,57 @@ public class Checkers_Screen {
 		frame.setVisible(true);
 	}
 	
-	public static void playGame(){
-		if(currentPlayer == 1){
+	
+	public static void playGame(int player){
+		
+		if(player == 1){
+			
 			for(int i = 0; i < numOfPlayerPieces; i++){
 				playerOnePieces[i].setDraggable(true);
 				playerTwoPieces[i].setDraggable(false);
 				//System.out.println("    draggable = " + playerOnePieces[i].isDraggable());
 				//System.out.println("    draggable = " + playerTwoPieces[i].isDraggable());
 			}
-			//currentPlayer = 2;
+			
+			mainBoard.dragEvent.addObserver(new Observer() {
+				@Override
+				public void update(Observable o, Object arg) {
+					System.out.println(arg);
+				//	System.out.println("one");
+					//playGame(2);
+			    }
+			});
+			
+			mainBoard.dragEvent.addObserver(new Observer() {
+				@Override
+				public void update(Observable o, Object arg) {
+					System.out.println("one");
+					playGame(2);
+			    }
+			});
 		}
-		if(currentPlayer == 2){
+		
+		if(player == 2){
 			for(int i = 0; i < numOfPlayerPieces; i++){
 				playerOnePieces[i].setDraggable(false);
 				playerTwoPieces[i].setDraggable(true);
 			}
-			//currentPlayer = 1;
+			
+			mainBoard.dragEvent.addObserver(new Observer() {
+				@Override
+				public void update(Observable o, Object arg) {
+					System.out.println(arg);
+					//System.out.println("two");
+					//playGame(1);
+			    }
+			});
+			mainBoard.dragEvent.addObserver(new Observer() {
+				@Override
+				public void update(Observable o, Object arg) {
+					System.out.println("two");
+					playGame(1);
+			    }
+			});
 		}
     }
 }
