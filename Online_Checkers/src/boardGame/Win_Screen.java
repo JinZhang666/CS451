@@ -7,13 +7,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JButton;
-import java.awt.BorderLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class Forfeited_Screen {
+public class Win_Screen {
 
-	JFrame frame;
+	private JFrame frame;
 
 	/**
 	 * Launch the application.
@@ -22,7 +21,7 @@ public class Forfeited_Screen {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Forfeited_Screen window = new Forfeited_Screen();
+					Win_Screen window = new Win_Screen();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -34,7 +33,7 @@ public class Forfeited_Screen {
 	/**
 	 * Create the application.
 	 */
-	public Forfeited_Screen() {
+	public Win_Screen() {
 		initialize();
 	}
 
@@ -46,14 +45,25 @@ public class Forfeited_Screen {
 		frame.setBounds(300, 0, 750, 625);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		//Forfeited Screen setup
-		JLabel forfeit = new JLabel("");
-		forfeit.setBounds(0, 0, 750, 603);
-		Image f = new ImageIcon(this.getClass().getResource("/forfeited_screen.png")).getImage();
-		Image f1 = f.getScaledInstance(forfeit.getWidth(), forfeit.getHeight(), Image.SCALE_SMOOTH);
-		ImageIcon f2 = new ImageIcon(f1);
-		forfeit.setIcon(f2);
+		//Game End Screen setup
+		JLabel win = new JLabel("");
+		win.setBounds(0, 0, 750, 603);
+		Image w = new ImageIcon(this.getClass().getResource("/win_screen.png")).getImage();
+		Image w1 = w.getScaledInstance(win.getWidth(), win.getHeight(), Image.SCALE_SMOOTH);
+		ImageIcon w2 = new ImageIcon(w1);
 		frame.getContentPane().setLayout(null);
+		
+		JButton btnPlayAgain = new JButton("");
+		btnPlayAgain.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Checkers_Screen cs = new Checkers_Screen();
+				cs.frame.setVisible(true);
+				frame.dispose();
+			}
+		});
+		btnPlayAgain.setBorderPainted(false);
+		btnPlayAgain.setBounds(284, 338, 178, 47);
+		frame.getContentPane().add(btnPlayAgain);
 		
 		JButton btnMainMenu = new JButton("");
 		btnMainMenu.addActionListener(new ActionListener() {
@@ -64,7 +74,8 @@ public class Forfeited_Screen {
 			}
 		});
 		btnMainMenu.setBorderPainted(false);
-		btnMainMenu.setBounds(277, 330, 193, 46);
+		btnMainMenu.setBounds(281, 407, 183, 48);
+		frame.getContentPane().add(btnMainMenu);
 		
 		JButton btnQuitGame = new JButton("");
 		btnQuitGame.addActionListener(new ActionListener() {
@@ -75,10 +86,11 @@ public class Forfeited_Screen {
 			}
 		});
 		btnQuitGame.setBorderPainted(false);
-		btnQuitGame.setBounds(277, 420, 193, 51);
-		
-		frame.getContentPane().add(btnMainMenu);
+		btnQuitGame.setBounds(289, 476, 171, 46);
 		frame.getContentPane().add(btnQuitGame);
-		frame.getContentPane().add(forfeit);
+		win.setIcon(w2);
+		
+		frame.getContentPane().add(win);
 	}
+
 }

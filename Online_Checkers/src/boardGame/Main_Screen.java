@@ -73,15 +73,6 @@ public class Main_Screen {
 				Credit_Screen cs = new Credit_Screen();
 				cs.frame.setVisible(true);
 				frame.dispose();
-				/*
-				try {
-					Thread.sleep(3000);
-				} catch (InterruptedException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				frame.setVisible(false);
-				*/
 			}
 		});
 		btnExitGame.setOpaque(false);
