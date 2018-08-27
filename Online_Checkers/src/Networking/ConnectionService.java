@@ -1,6 +1,7 @@
 package Networking;
 
 import java.awt.Image;
+import java.awt.Toolkit;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -50,7 +51,8 @@ public class ConnectionService implements WarpListener{
 			    jd.setVisible(false);
 				jd.dispose();		
 */
-		ImageIcon icon = new ImageIcon("data/connection_duck.png");
+		
+		ImageIcon icon = new ImageIcon(ConnectionService.class.getResource("/connection_duck.png"));
 		JOptionPane m = new JOptionPane(msg,  JOptionPane.INFORMATION_MESSAGE);
 		m.setIcon(icon);
 		JDialog dlg = m.createDialog("Connecting...");
