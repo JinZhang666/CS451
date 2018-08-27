@@ -4,11 +4,15 @@ import java.awt.EventQueue;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+
+import Networking.ConnectionService;
+import appwarp.WarpController;
 
 public class Main_Screen {
 
@@ -57,6 +61,14 @@ public class Main_Screen {
 		JButton btnStartGame = new JButton("");
 		btnStartGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+		    
+			//??JIN: When btnStartGame clicked => start appWarp App => Connect
+				System.out.println("**********Going to Connect************");
+				WarpController.getInstance().startApp(getRandomHexString(10));
+				ConnectionService c = new ConnectionService();
+				
+			//***********************************************************************
+				
 				Checkers_Screen cs = new Checkers_Screen();
 				cs.frame.setVisible(true);
 				frame.dispose();
@@ -122,4 +134,16 @@ public class Main_Screen {
 		frame.getContentPane().add(main);
 	}
 
+	//JIN
+	/*
+	Generate random string used as unique user id to connect to APPWarp
+	*/
+	private String getRandomHexString(int numchars){
+	      Random r = new Random();
+	      StringBuffer sb = new StringBuffer();
+	      while(sb.length() < numchars){
+	          sb.append(Integer.toHexString(r.nextInt()));
+	      }
+	      return sb.toString().substring(0, numchars);
+	  }
 }
