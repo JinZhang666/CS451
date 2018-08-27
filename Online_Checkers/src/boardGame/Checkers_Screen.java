@@ -1,8 +1,9 @@
 /*
  * Author: Kimberly Ly
- * Date: 	8/17/2018
+ * Date: 	8/27/2018
  * Updates: 8/19/2018 - Integrated this window into the overall application flow 
  * 				(splash screen -> login screen -> main screen's "Start Game" -> checkers screen)
+ * 			8/19/2018 and on - Work added to start the game between the 2 players
  * Description: This window displays the Checkers game where both players are playing on.
  */
 package boardGame;
@@ -52,7 +53,7 @@ public class Checkers_Screen {
 	JButton forfeitButton = new JButton("FORFEIT GAME");
 	
 	static int currentPlayer = 1; // makes the Player One the player to start the game off
-	static boolean gameEnd = true;
+	static boolean gameEnd = false;
 	
 	public static void main(String args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -243,9 +244,11 @@ public class Checkers_Screen {
 				isValidMove = Validation.isRegularMove(mainBoard.getSelectedPiece(), mainBoard, fromRow, fromCol);
 				
 				System.out.println(mainBoard.getSelectedPiece());
+				
 				if(isValidMove) {
 					playGame(nextPlayer);
-				}else {//return piece to original square if move is not valid
+				}
+				else {//return piece to original square if move is not valid
 					//mainBoard.changePositionOnBoard(mainBoard.getSelectedPiece(), toRow, toCol, fromRow, fromCol);
 					mainBoard.remove(mainBoard.getSelectedPiece());
 					mainBoard.place(mainBoard.getSelectedPiece(), fromRow, fromCol);
@@ -270,8 +273,7 @@ public class Checkers_Screen {
 			
 			moveValidation(2);
 		}
-		
-		if(player == 2){
+		else if(player == 2){
 			for(int i = 0; i < numOfPlayerPieces; i++){
 				playerOnePieces[i].setDraggable(false);
 				playerTwoPieces[i].setDraggable(true);
