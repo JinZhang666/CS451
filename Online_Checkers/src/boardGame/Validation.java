@@ -16,7 +16,7 @@ public class Validation {
 		Piece NECap;
 		Piece SWCap;
 		Piece SECap;
-		if(p.getName().equals("PlayerTwo"))
+		if(p.getName().equals("playerTwo"))
 		{
 			if(r - 2 >= 0 && c - 2 >= 0)
 			{
@@ -45,7 +45,7 @@ public class Validation {
 				}
 			}
 		}
-		if(p.getName().equals("PlayerOne"))
+		if(p.getName().equals("playerOne"))
 		{
 			if(r - 2 >= 0 && c + 2 < boundc)
 			{
@@ -153,6 +153,7 @@ public class Validation {
 		{
 			return false;
 		}
+		System.out.println(p.isKingPiece());
 		if(p.isRegularPiece())
 		{
 			if(isRegularMove(p, b, r, c))
@@ -194,7 +195,7 @@ public class Validation {
 	 * REQUIRES: prow, pcol, mrow, mcol are not out of bounds
 	 * ENSURES: returns true if the move coordintates are diagonal by 1 square to the current player position
 	 * */
-	private static boolean isDiagonal(int prow, int pcol, int mrow, int mcol)
+	public static boolean isDiagonal(int prow, int pcol, int mrow, int mcol)
 	{
 		return (mrow == prow + 1 && mcol == pcol + 1) || (mrow == prow - 1 && mcol == pcol + 1) || (mrow == prow + 1 && mcol == pcol - 1) || (mrow == prow - 1 && mcol == pcol - 1);
 	}
@@ -220,13 +221,15 @@ public class Validation {
 				return false;
 			}
 			//check if movement is valid for specific player
-			if(p.getName().equals("PlayerOne")) //check if piece moving "down" the board (up the row number)
+			if(p.getName().equals("playerOne")) //check if piece moving "down" the board (up the row number)
 			{
-				return prow < r;
-			}
-			else if(p.getName().equals("PlayerTwo")) //check if piece moving "up" the board (down the row number)
-			{
+				//return prow < r;
 				return prow > r;
+			}
+			else if(p.getName().equals("playerTwo")) //check if piece moving "up" the board (down the row number)
+			{
+				//return prow > r;
+				return prow < r;
 			}
 			else
 			{
@@ -276,7 +279,7 @@ public class Validation {
 	{
 		int prow = p.getRow();
 		int pcol = p.getColumn();
-		if(p.getName().equals("PlayerOne")) //their pieces go DOWN (aka + numbers)
+		if(p.getName().equals("playerOne")) //their pieces go DOWN (aka + numbers)
 		{
 			if(!isJumpCoord(prow, pcol, r, c) || r < prow) //if piece is not moving "down" (move is < current pos)
 			{
@@ -298,7 +301,7 @@ public class Validation {
 				return false;
 			}
 			//Check if capture piece belongs to Playertwo
-			if(!capture.getName().equals("PlayerTwo"))
+			if(!capture.getName().equals("playerTwo"))
 			{
 				return false;
 			}
@@ -310,7 +313,7 @@ public class Validation {
 			}
 			return true;
 		}
-		else if(p.getName().equals("PlayerTwo"))//player == playerTwo
+		else if(p.getName().equals("playerTwo"))//player == playerTwo
 		{
 			if(!isJumpCoord(prow, pcol, r, c) ||r > prow) //if piece is not moving "up" (move is > current pos)
 			{
@@ -332,7 +335,7 @@ public class Validation {
 				return false;
 			}
 			//Check if capture piece belongs to PlayerOne
-			if(!capture.getName().equals("PlayerOne"))
+			if(!capture.getName().equals("playerOne"))
 			{
 				return false;
 			}
@@ -393,13 +396,13 @@ public class Validation {
 			return false;
 		}
 		//Check if players are different
-		if(p.getName().equals("PlayerOne"))
+		if(p.getName().equals("playerOne"))
 		{
-			return capture.getName().equals("PlayerTwo");
+			return capture.getName().equals("playerTwo");
 		}
-		else if(p.getName().equals("PlayerTwo"))
+		else if(p.getName().equals("playerTwo"))
 		{
-			return capture.getName().equals("PlayerOne");
+			return capture.getName().equals("playerOne");
 		}
 		else
 		{

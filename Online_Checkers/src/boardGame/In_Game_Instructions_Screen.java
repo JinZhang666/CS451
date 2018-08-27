@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
-public class Instructions_Screen {
+public class In_Game_Instructions_Screen {
 
 	JFrame frame;
 
@@ -39,7 +39,7 @@ public class Instructions_Screen {
 	/**
 	 * Create the window.
 	 */
-	public Instructions_Screen() {
+	public In_Game_Instructions_Screen() {
 		initialize();
 	}
 
@@ -48,19 +48,20 @@ public class Instructions_Screen {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(300, 0, 750, 625);
+		frame.setBounds(450, 0, 400, 450);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		//Instructions Screen setup
 		JLabel instructions = new JLabel("");
-		instructions.setBounds(0, 0, 750, 603);
-		Image i = new ImageIcon(this.getClass().getResource("/instructions_screen.png")).getImage();
+		instructions.setBounds(0, 0, 400, 425);
+		Image i = new ImageIcon(this.getClass().getResource("/in_game_instructions_screen.png")).getImage();
 		Image i1 = i.getScaledInstance(instructions.getWidth(), instructions.getHeight(), Image.SCALE_SMOOTH);
 		ImageIcon i2 = new ImageIcon(i1);
 		instructions.setIcon(i2);
 		
 		JButton btnInstrucToMain = new JButton("");
+		btnInstrucToMain.setEnabled(false);
 		btnInstrucToMain.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Main_Screen ms = new Main_Screen();
@@ -74,9 +75,8 @@ public class Instructions_Screen {
 		btnInstrucToMain.setBounds(232, 165, 39, 37);
 		
 		JTextArea instructions_text = new JTextArea(5, 200);
-		instructions_text.setEditable(false);
 		JScrollPane scrollPane = new JScrollPane(instructions_text);
-		scrollPane.setBounds(181, 232, 378, 348);
+		scrollPane.setBounds(19, 55, 362, 354);
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.setPreferredSize(new Dimension(222, 160));
 		try {

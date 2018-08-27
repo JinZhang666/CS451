@@ -45,13 +45,13 @@ public class Help_Screen {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(300, 0, 750, 625);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		//Game End Screen setup
 		JLabel help = new JLabel("");
-		help.setBounds(0, 0, 450, 278);
+		help.setBounds(0, 0, 750, 603);
 		Image h = new ImageIcon(this.getClass().getResource("/help_screen.png")).getImage();
 		Image h1 = h.getScaledInstance(help.getWidth(), help.getHeight(), Image.SCALE_SMOOTH);
 		ImageIcon h2 = new ImageIcon(h1);
@@ -60,7 +60,7 @@ public class Help_Screen {
 		JTextArea instructions_text = new JTextArea(5, 200);
 		instructions_text.setEditable(false);
 		JScrollPane scrollPane = new JScrollPane(instructions_text);
-		scrollPane.setBounds(101, 69, 243, 174);
+		scrollPane.setBounds(170, 153, 404, 373);
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.setPreferredSize(new Dimension(243, 174));
 		try {

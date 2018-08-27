@@ -29,7 +29,10 @@ public class Board extends Observable implements Observer {
     private Vector<Piece> allPieces = new Vector<Piece>();
     private int selectedRow = -1;
     private int selectedColumn = -1;
+    private int placedRow = -1;
+    private int placedCol = -1;
     private Piece selectedPiece = null;
+    private Piece selectedPiece2 = null;
     private int rows;
     private int columns;
     private int defaultSpeed = 10;
@@ -68,6 +71,11 @@ public class Board extends Observable implements Observer {
             }
         }
         display.addMouseListener(new MouseAdapter() {
+        	public void mouseReleased(MouseEvent e) {
+            	placedRow = yToRow(e.getY());
+                placedCol = xToColumn(e.getX());
+             }
+        	
             public void mouseClicked(MouseEvent e) {
                 selectedRow = yToRow(e.getY());
                 selectedColumn = xToColumn(e.getX());
@@ -75,6 +83,7 @@ public class Board extends Observable implements Observer {
                 setChanged();
                 notifyObservers(new int[] { selectedRow, selectedColumn });
             }
+            
         });        
         display.addComponentListener(new ComponentAdapter() {
             public void componentResized(ComponentEvent arg0) {
@@ -93,6 +102,7 @@ public class Board extends Observable implements Observer {
             display.addMouseListener(listener);
             display.addMouseMotionListener(listener);
     }
+    
     
     /**
      * Returns the JPanel on which this board is displayed.
@@ -617,6 +627,26 @@ public class Board extends Observable implements Observer {
         return selectedColumn;
     }
        
+    /**
+     * Returns the row number (counting from zero) of the currently
+     * placed square, or -1 if none is selected.
+     * 
+     * @return The placed row number.
+     */
+    public int getPlacedRow() {
+        return placedRow;
+    }
+   
+    /**
+     * Returns the column number (counting from zero) of the currently
+     * placed square, or -1 if none is selected.
+     * 
+     * @return The placed column number.
+     */
+    public int getPlacedColC() {
+        return placedCol;
+    }
+    
     /**
      * If the given square is selectable, select it, otherwise
      * do nothing.

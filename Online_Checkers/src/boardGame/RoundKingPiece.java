@@ -10,6 +10,9 @@ public class RoundKingPiece extends Piece{
      * Constructs a <code>RoundKingPiece</code>.
      **/
     public RoundKingPiece() {
+    	super();
+    	regularPieceType = false;
+        kingPieceType = true;
     }
     
     /**
@@ -18,7 +21,10 @@ public class RoundKingPiece extends Piece{
      * @param color The <code>Color</code> of the new piece.
      **/
      public RoundKingPiece(Color color) {
+    	 super();
         this.color = color;
+        regularPieceType = false;
+        kingPieceType = true;
     }
      
      /**
@@ -29,6 +35,8 @@ public class RoundKingPiece extends Piece{
       **/
      public RoundKingPiece(String name, Color color) {
          super(name);
+         regularPieceType = false;
+         kingPieceType = true;
          this.color = color;
      }
 	

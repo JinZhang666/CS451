@@ -9,6 +9,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import java.awt.BorderLayout;
 
 
 public class Splash_Screen {
@@ -43,12 +44,12 @@ public class Splash_Screen {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(300, 0, 750, 625);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		//Splash Screen setup
 		JLabel splash = new JLabel("");
-		splash.setBounds(0, 0, 450, 278);
+		splash.setBounds(0, 0, 750, 603);
 		Image s = new ImageIcon(this.getClass().getResource("/splash_screen.png")).getImage();
 		Image s1 = s.getScaledInstance(splash.getWidth(), splash.getHeight(), Image.SCALE_SMOOTH);
 		ImageIcon s2 = new ImageIcon(s1);
@@ -65,7 +66,8 @@ public class Splash_Screen {
 				frame.dispose();
 			}
 		});
-		btnEnterGame.setBounds(276, 106, 117, 29);
+		frame.getContentPane().setLayout(null);
+		btnEnterGame.setBounds(458, 235, 200, 49);
 		frame.getContentPane().add(btnEnterGame);
 		frame.getContentPane().add(splash);
 	}

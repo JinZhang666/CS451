@@ -47,12 +47,12 @@ public class Main_Screen {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(300, 0, 750, 625);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		//Main Screen setup
 		JLabel main = new JLabel("");
-		main.setBounds(0, 0, 450, 278);
+		main.setBounds(0, 0, 750, 603);
 		Image m = new ImageIcon(this.getClass().getResource("/main_screen.png")).getImage();
 		Image m1 = m.getScaledInstance(main.getWidth(), main.getHeight(), Image.SCALE_SMOOTH);
 		ImageIcon m2 = new ImageIcon(m1);
@@ -77,7 +77,7 @@ public class Main_Screen {
 		btnStartGame.setOpaque(false);
 		btnStartGame.setContentAreaFilled(false);
 		btnStartGame.setBorderPainted(false);
-		btnStartGame.setBounds(277, 94, 117, 29);
+		btnStartGame.setBounds(453, 209, 205, 48);
 		
 		JButton btnExitGame = new JButton("");
 		btnExitGame.addActionListener(new ActionListener() {
@@ -85,21 +85,12 @@ public class Main_Screen {
 				Credit_Screen cs = new Credit_Screen();
 				cs.frame.setVisible(true);
 				frame.dispose();
-				/*
-				try {
-					Thread.sleep(3000);
-				} catch (InterruptedException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				frame.setVisible(false);
-				*/
 			}
 		});
 		btnExitGame.setOpaque(false);
 		btnExitGame.setContentAreaFilled(false);
 		btnExitGame.setBorderPainted(false);
-		btnExitGame.setBounds(277, 135, 117, 29);
+		btnExitGame.setBounds(453, 299, 205, 48);
 		
 		JButton btnInstructions = new JButton("");
 		btnInstructions.addActionListener(new ActionListener() {
@@ -112,7 +103,7 @@ public class Main_Screen {
 		btnInstructions.setOpaque(false);
 		btnInstructions.setContentAreaFilled(false);
 		btnInstructions.setBorderPainted(false);
-		btnInstructions.setBounds(277, 176, 117, 29);
+		btnInstructions.setBounds(453, 385, 205, 48);
 		
 		JButton btnAbout = new JButton("");
 		btnAbout.addActionListener(new ActionListener() {
@@ -125,7 +116,8 @@ public class Main_Screen {
 		btnAbout.setOpaque(false);
 		btnAbout.setContentAreaFilled(false);
 		btnAbout.setBorderPainted(false);
-		btnAbout.setBounds(277, 212, 117, 29);
+		btnAbout.setBounds(453, 463, 205, 48);
+		frame.getContentPane().setLayout(null);
 		
 		frame.getContentPane().add(btnStartGame);
 		frame.getContentPane().add(btnExitGame);

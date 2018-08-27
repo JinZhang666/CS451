@@ -2,13 +2,15 @@ package boardGame;
 
 import java.awt.EventQueue;
 import java.awt.Image;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 public class Credit_Screen {
-
+	
 	JFrame frame;
 
 	/**
@@ -38,28 +40,31 @@ public class Credit_Screen {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		//close window after 2 seconds
+		Timer time = new Timer();
+		time.schedule(new TimerTask(){
+			@Override
+			public void run() {
+				frame.setVisible(false);
+				frame.dispose();
+			}
+		}, 2000);
+		
+		
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(300, 0, 750, 625);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		//Credit Screen setup
 		JLabel credit = new JLabel("");
-		credit.setBounds(0, 0, 450, 278);
+		credit.setBounds(300, 0, 750, 603);
 		Image c = new ImageIcon(this.getClass().getResource("/credits_screen.png")).getImage();
 		Image c1 = c.getScaledInstance(credit.getWidth(), credit.getHeight(), Image.SCALE_SMOOTH);
 		ImageIcon c2 = new ImageIcon(c1);
 		credit.setIcon(c2);
 		
 		frame.getContentPane().add(credit);
-		/*
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		*/
-		frame.dispose();
 	}
+
 
 }

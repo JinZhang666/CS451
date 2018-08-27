@@ -22,7 +22,7 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
-public class About_Screen {
+public class In_Game_About_Screen {
 
 	JFrame frame;
 
@@ -45,7 +45,7 @@ public class About_Screen {
 	/**
 	 * Create the window.
 	 */
-	public About_Screen() {
+	public In_Game_About_Screen() {
 		initialize();
 	}
 
@@ -54,14 +54,14 @@ public class About_Screen {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(300, 0, 750, 625);
+		frame.setBounds(450, 0, 400, 450);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		//About Screen setup
 		JLabel about = new JLabel("");
 		about.setFont(new Font("American Typewriter", Font.PLAIN, 16));
-		about.setBounds(0, 0, 750, 603);
-		Image a = new ImageIcon(this.getClass().getResource("/about_screen.png")).getImage();
+		about.setBounds(0, 0, 400, 428);
+		Image a = new ImageIcon(this.getClass().getResource("/in_game_about_screen.png")).getImage();
 		Image a1 = a.getScaledInstance(about.getWidth(), about.getHeight(), Image.SCALE_SMOOTH);
 		ImageIcon a2 = new ImageIcon(a1);
 		about.setIcon(a2);
@@ -85,12 +85,12 @@ public class About_Screen {
 		txtrClientVersion.setOpaque(false);
 		txtrClientVersion.setEditable(false);
 		txtrClientVersion.setText("Client Version:");
-		txtrClientVersion.setBounds(311, 266, 112, 26);
+		txtrClientVersion.setBounds(147, 109, 112, 26);
 		
 		JTextPane txtVersion = new JTextPane();
 		txtVersion.setOpaque(false);
 		txtVersion.setEditable(false);
-		txtVersion.setBounds(311, 294, 112, 26);
+		txtVersion.setBounds(147, 147, 112, 26);
 		try {
 			FileReader in = new FileReader("data/version.txt");
 			BufferedReader br = new BufferedReader(in);
@@ -110,12 +110,12 @@ public class About_Screen {
 		txtrPatchLog.setFont(new Font("American Typewriter", Font.PLAIN, 16));
 		txtrPatchLog.setOpaque(false);
 		txtrPatchLog.setText("Patch Log: ");
-		txtrPatchLog.setBounds(328, 343, 83, 27);
+		txtrPatchLog.setBounds(162, 198, 83, 27);
 		
 		JTextPane txtLog = new JTextPane();
 		txtLog.setOpaque(false);
 		txtLog.setEditable(false);
-		txtLog.setBounds(274, 373, 190, 118);
+		txtLog.setBounds(109, 237, 190, 118);
 		try {
 			FileReader in = new FileReader("data/log.txt");
 			BufferedReader br = new BufferedReader(in);
