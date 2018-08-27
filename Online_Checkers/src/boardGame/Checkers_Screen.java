@@ -210,34 +210,57 @@ public class Checkers_Screen {
 		frame.setVisible(true);
 	}
 	
+	/*
+	 * Stores the position of where the piece were dragged from to dropped to
+	 * And stores valid moves
+	 */
+	static int fromRow = -1;
+	static int fromCol = -1;
+	static int toRow = -1;
+	static int toCol = -1;
+	static boolean diagonal = false;
+
+	/*
+	 * Check whether the move is valid and alternating between the two players
+	 */
+	public static void moveValidation(int nextPlayer) {
+		mainBoard.dragEvent.addObserver(new Observer() {
+			@Override
+			public void update(Observable o, Object arg) {
+				fromRow = mainBoard.getSelectedRow();
+				fromCol = mainBoard.getSelectedColumn();
+				toRow = mainBoard.getPlacedRow();
+				toCol = mainBoard.getPlacedColC();
+				
+				diagonal = Validation.isDiagonal(fromRow, fromCol, toRow, toCol);
+				System.out.println("diagonal " + diagonal);
+				
+				if(diagonal) {
+					playGame(nextPlayer);
+				}else {//return piece to original square if move is not diagonal
+					//mainBoard.changePositionOnBoard(mainBoard.getSelectedPiece(), toRow, toCol, fromRow, fromCol);
+					mainBoard.remove(mainBoard.getSelectedPiece());
+					mainBoard.place(mainBoard.getSelectedPiece(), fromRow, fromCol);
+				}
+		    }
+
+		});
+	}
 	
+	/*
+	 * Player 1 starts first 
+	 * it calls the moveValidation function
+	 * to validates moves and alternates
+	 */
 	public static void playGame(int player){
 		
 		if(player == 1){
-			
 			for(int i = 0; i < numOfPlayerPieces; i++){
 				playerOnePieces[i].setDraggable(true);
 				playerTwoPieces[i].setDraggable(false);
-				//System.out.println("    draggable = " + playerOnePieces[i].isDraggable());
-				//System.out.println("    draggable = " + playerTwoPieces[i].isDraggable());
 			}
 			
-			mainBoard.dragEvent.addObserver(new Observer() {
-				@Override
-				public void update(Observable o, Object arg) {
-					System.out.println(arg);
-				//	System.out.println("one");
-					//playGame(2);
-			    }
-			});
-			
-			mainBoard.dragEvent.addObserver(new Observer() {
-				@Override
-				public void update(Observable o, Object arg) {
-					System.out.println("one");
-					playGame(2);
-			    }
-			});
+			moveValidation(2);
 		}
 		
 		if(player == 2){
@@ -245,22 +268,8 @@ public class Checkers_Screen {
 				playerOnePieces[i].setDraggable(false);
 				playerTwoPieces[i].setDraggable(true);
 			}
-			
-			mainBoard.dragEvent.addObserver(new Observer() {
-				@Override
-				public void update(Observable o, Object arg) {
-					System.out.println(arg);
-					//System.out.println("two");
-					//playGame(1);
-			    }
-			});
-			mainBoard.dragEvent.addObserver(new Observer() {
-				@Override
-				public void update(Observable o, Object arg) {
-					System.out.println("two");
-					playGame(1);
-			    }
-			});
+
+			moveValidation(1);
 		}
     }
 }

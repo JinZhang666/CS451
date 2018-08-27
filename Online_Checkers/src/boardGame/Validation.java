@@ -195,7 +195,7 @@ public class Validation {
 	 * REQUIRES: prow, pcol, mrow, mcol are not out of bounds
 	 * ENSURES: returns true if the move coordintates are diagonal by 1 square to the current player position
 	 * */
-	private static boolean isDiagonal(int prow, int pcol, int mrow, int mcol)
+	public static boolean isDiagonal(int prow, int pcol, int mrow, int mcol)
 	{
 		return (mrow == prow + 1 && mcol == pcol + 1) || (mrow == prow - 1 && mcol == pcol + 1) || (mrow == prow + 1 && mcol == pcol - 1) || (mrow == prow - 1 && mcol == pcol - 1);
 	}
