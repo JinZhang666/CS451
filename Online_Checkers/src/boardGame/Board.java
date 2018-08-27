@@ -29,10 +29,7 @@ public class Board extends Observable implements Observer {
     private Vector<Piece> allPieces = new Vector<Piece>();
     private int selectedRow = -1;
     private int selectedColumn = -1;
-    private int selectedR = -1;
-    private int selectedC = -1;
     private Piece selectedPiece = null;
-    private Piece selectedPiece2 = null;
     private int rows;
     private int columns;
     private int defaultSpeed = 10;
@@ -71,11 +68,6 @@ public class Board extends Observable implements Observer {
             }
         }
         display.addMouseListener(new MouseAdapter() {
-        	public void mousePressed(MouseEvent e) {
-            	selectedR = yToRow(e.getY());
-                selectedC = xToColumn(e.getX());
-             }
-        	
             public void mouseClicked(MouseEvent e) {
                 selectedRow = yToRow(e.getY());
                 selectedColumn = xToColumn(e.getX());
@@ -83,7 +75,6 @@ public class Board extends Observable implements Observer {
                 setChanged();
                 notifyObservers(new int[] { selectedRow, selectedColumn });
             }
-            
         });        
         display.addComponentListener(new ComponentAdapter() {
             public void componentResized(ComponentEvent arg0) {
@@ -102,7 +93,6 @@ public class Board extends Observable implements Observer {
             display.addMouseListener(listener);
             display.addMouseMotionListener(listener);
     }
-    
     
     /**
      * Returns the JPanel on which this board is displayed.
@@ -627,26 +617,6 @@ public class Board extends Observable implements Observer {
         return selectedColumn;
     }
        
-    /**
-     * Returns the row number (counting from zero) of the previously
-     * selected square, or -1 if none is selected.
-     * 
-     * @return The selected row number.
-     */
-    public int getSelectedR() {
-        return selectedRow;
-    }
-   
-    /**
-     * Returns the column number (counting from zero) of the previously
-     * selected square, or -1 if none is selected.
-     * 
-     * @return The selected column number.
-     */
-    public int getSelectedC() {
-        return selectedColumn;
-    }
-    
     /**
      * If the given square is selectable, select it, otherwise
      * do nothing.
