@@ -204,6 +204,14 @@ public class Checkers_Screen {
 		gblTwo.setConstraints(playerTwoLabel, gbcTwo);
 		leftPanel.add(playerTwoLabel);
 		
+		forfeitButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Forfeited_Screen fs = new Forfeited_Screen();
+				fs.frame.setVisible(true);
+				frame.dispose();
+			}
+		});
+		
 		forfeitButton.setFocusable(false);
 		rightPanel.add(forfeitButton);
 		
@@ -218,7 +226,7 @@ public class Checkers_Screen {
 	static int fromCol = -1;
 	static int toRow = -1;
 	static int toCol = -1;
-	static boolean diagonal = false;
+	static boolean isValidMove;
 
 	/*
 	 * Check whether the move is valid and alternating between the two players
@@ -232,12 +240,12 @@ public class Checkers_Screen {
 				toRow = mainBoard.getPlacedRow();
 				toCol = mainBoard.getPlacedColC();
 				
-				diagonal = Validation.isDiagonal(fromRow, fromCol, toRow, toCol);
-				System.out.println("diagonal " + diagonal);
+				isValidMove = Validation.isRegularMove(mainBoard.getSelectedPiece(), mainBoard, fromRow, fromCol);
 				
-				if(diagonal) {
+				System.out.println(mainBoard.getSelectedPiece());
+				if(isValidMove) {
 					playGame(nextPlayer);
-				}else {//return piece to original square if move is not diagonal
+				}else {//return piece to original square if move is not valid
 					//mainBoard.changePositionOnBoard(mainBoard.getSelectedPiece(), toRow, toCol, fromRow, fromCol);
 					mainBoard.remove(mainBoard.getSelectedPiece());
 					mainBoard.place(mainBoard.getSelectedPiece(), fromRow, fromCol);

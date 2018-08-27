@@ -223,11 +223,13 @@ public class Validation {
 			//check if movement is valid for specific player
 			if(p.getName().equals("playerOne")) //check if piece moving "down" the board (up the row number)
 			{
-				return prow < r;
+				//return prow < r;
+				return prow > r;
 			}
 			else if(p.getName().equals("playerTwo")) //check if piece moving "up" the board (down the row number)
 			{
-				return prow > r;
+				//return prow > r;
+				return prow < r;
 			}
 			else
 			{
