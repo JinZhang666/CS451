@@ -32,6 +32,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.Observable;
 import java.util.Observer;
+import java.awt.Insets;
 
 public class Checkers_Screen {
 
@@ -51,6 +52,7 @@ public class Checkers_Screen {
 	JPanel rightPanel = new JPanel();
 	Border lowerEtched = BorderFactory.createEtchedBorder(EtchedBorder.LOWERED);
 	JButton forfeitButton = new JButton("FORFEIT GAME");
+	JButton confirmButton = new JButton("CONFIRM");
 	
 	static int currentPlayer = 1; // makes the Player One the player to start the game off
 	static boolean gameEnd = false;
@@ -143,7 +145,8 @@ public class Checkers_Screen {
 		// Setting up the menu bar functionality
 		exitGame.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				frame.setVisible(false);
+				Credit_Screen cs = new Credit_Screen();
+				cs.frame.setVisible(true);
 				frame.dispose();
 			}
 		});
@@ -178,14 +181,22 @@ public class Checkers_Screen {
 		gbcOne.gridx = 0;
 		gbcOne.gridy = 0;
 		gblOne.setConstraints(leftPanel, gbcOne);
-		pane.add(leftPanel);
+		GridBagConstraints gbc_leftPanel = new GridBagConstraints();
+		gbc_leftPanel.insets = new Insets(0, 0, 5, 5);
+		gbc_leftPanel.gridx = 0;
+		gbc_leftPanel.gridy = 0;
+		pane.add(leftPanel, gbc_leftPanel);
 		
 		rightPanel.setBorder(lowerEtched);
 		gbcOne.weightx = 0.25;
 		gbcOne.gridx = 1;
 		gbcOne.gridy = 0;
 		gblOne.setConstraints(rightPanel, gbcOne);
-		pane.add(rightPanel);
+		GridBagConstraints gbc_rightPanel = new GridBagConstraints();
+		gbc_rightPanel.insets = new Insets(0, 0, 5, 0);
+		gbc_rightPanel.gridx = 1;
+		gbc_rightPanel.gridy = 0;
+		pane.add(rightPanel, gbc_rightPanel);
 		
 		leftPanel.setLayout(gblTwo);
 		gbcTwo.fill = GridBagConstraints.VERTICAL;
@@ -214,7 +225,25 @@ public class Checkers_Screen {
 		});
 		
 		forfeitButton.setFocusable(false);
-		rightPanel.add(forfeitButton);
+		GridBagConstraints gbc_confirmButton = new GridBagConstraints();
+		gbc_confirmButton.gridx = 1;
+		gbc_confirmButton.gridy = 1;
+		frame.getContentPane().add(forfeitButton, gbc_confirmButton);
+		
+		confirmButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(currentPlayer == 1) {
+					currentPlayer = 2;
+					playGame(currentPlayer);
+				}else {
+					currentPlayer = 1;
+					playGame(currentPlayer);
+				}
+			}
+		});
+		
+		confirmButton.setFocusable(false);
+		rightPanel.add(confirmButton);
 		
 		frame.setVisible(true);
 	}
@@ -232,6 +261,7 @@ public class Checkers_Screen {
 	/*
 	 * Check whether the move is valid and alternating between the two players
 	 */
+	
 	public static void moveValidation(int nextPlayer) {
 		mainBoard.dragEvent.addObserver(new Observer() {
 			@Override
@@ -241,15 +271,12 @@ public class Checkers_Screen {
 				toRow = mainBoard.getPlacedRow();
 				toCol = mainBoard.getPlacedColC();
 				
-				isValidMove = Validation.isRegularMove(mainBoard.getSelectedPiece(), mainBoard, fromRow, fromCol);
+				isValidMove = Validation.isValidMove(mainBoard.getSelectedPiece(), mainBoard, fromRow, fromCol);
 				
 				System.out.println(mainBoard.getSelectedPiece());
 				
-				if(isValidMove) {
-					playGame(nextPlayer);
-				}
-				else {//return piece to original square if move is not valid
-					//mainBoard.changePositionOnBoard(mainBoard.getSelectedPiece(), toRow, toCol, fromRow, fromCol);
+				if(!isValidMove) {
+					//return piece to original square if move is not valid
 					mainBoard.remove(mainBoard.getSelectedPiece());
 					mainBoard.place(mainBoard.getSelectedPiece(), fromRow, fromCol);
 				}
