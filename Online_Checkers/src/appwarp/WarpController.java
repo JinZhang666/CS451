@@ -16,6 +16,8 @@ import com.shephertz.app42.gaming.multiplayer.client.command.WarpResponseResultC
 import com.shephertz.app42.gaming.multiplayer.client.events.RoomData;
 import com.shephertz.app42.gaming.multiplayer.client.events.RoomEvent;
 
+import Networking.ConnectionService;
+
 public class WarpController {
 
 	private static WarpController instance;
@@ -174,10 +176,13 @@ public class WarpController {
 	
 	public void onUserJoinedRoom(String roomId, String userName){
 		//JIN
+		/*
 		ImageIcon icon = new ImageIcon("data/connection_duck.png");
 		JOptionPane.showMessageDialog(null, "User Joined the room", "Connecting...", JOptionPane.INFORMATION_MESSAGE, icon);
 		log("onUserJoinedRoom "+userName+" in room "+roomId);
-
+       */
+	    ConnectionService.showConnectStatusWindow("User: "+ userName + " Joined the room");
+		
 		/*
 		 * if room id is same and username is different then start the game
 		 */
