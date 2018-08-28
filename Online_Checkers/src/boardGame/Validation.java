@@ -19,18 +19,15 @@ public class Validation {
 		Piece SECap;
 		if(p.getName().equals("playerTwo"))
 		{
-			System.out.println("two");
 			if(r - 2 >= 0 && c - 2 >= 0)
 			{
 				NWPiece = b.getPiece(r - 2, c - 2);
-				System.out.println("NW " + NWPiece);
 				if(NWPiece == null) //check if move location is empty
 				{
 					NWCap = b.getPiece(r - 1, c - 1);
 					//check if NWcapture piece has different player
 					if(NWCap != null && !NWCap.getName().equals(p.getName()))
 					{
-						System.out.println("NWCap " + NWCap);
 						return true;
 					}
 				}
@@ -38,14 +35,12 @@ public class Validation {
 			if(r - 2 < boundr && c + 2 < boundc)
 			{
 				NEPiece = b.getPiece(r - 2, c + 2);
-				System.out.println("NE " + NEPiece);
 				if(NEPiece == null)
 				{
 					NECap = b.getPiece(r - 1, c + 1);
 					//check if SECap piece has different player
 					if(NECap != null && !NECap.getName().equals(p.getName()))
 					{
-						System.out.println("NECap " + NECap);
 						return true;
 					}
 				}
@@ -53,15 +48,12 @@ public class Validation {
 		}
 		if(p.getName().equals("playerOne"))
 		{
-			System.out.println("one");
 			if(r + 2 >= 0 && c + 2 < boundc)
 			{
 				SWPiece = b.getPiece(r + 2, c + 2);
-				System.out.println("SW " + SWPiece);
 				if(SWPiece == null)
 				{
 					SWCap = b.getPiece(r + 1, c + 1);
-					System.out.println("SW Cap " + SWCap);
 					//check if SWCap piece has different player
 					if(SWCap != null && !SWCap.getName().equals(p.getName()))
 					{
@@ -72,14 +64,12 @@ public class Validation {
 			if(r + 2 < boundr && c - 2 >= 0)
 			{
 				SEPiece = b.getPiece(r + 2, c - 2);
-				System.out.println("SE " + SEPiece);
 				if(SEPiece == null ) //check if move location is empty
 				{
 					SECap = b.getPiece(r + 1, c - 1);
 					//check if NECap piece has different player
 					if(SECap != null && !SECap.getName().equals(p.getName()))
 					{
-						System.out.println("SECap " + SECap);
 						return true;
 					}
 				}
@@ -105,7 +95,7 @@ public class Validation {
 		if(r - 2 >= 0 && c - 2 >= 0)
 		{
 			NWPiece = b.getPiece(r - 2, c - 2);
-			if(NWPiece != null) //check if move location is empty
+			if(NWPiece == null) //check if move location is empty
 			{
 				NWCap = b.getPiece(r - 1, c - 1);
 				//check if NWcapture piece has different player
@@ -118,7 +108,7 @@ public class Validation {
 		if(r + 2 < boundr && c - 2 >= 0)
 		{
 			SEPiece = b.getPiece(r + 2, c - 2);
-			if(SEPiece != null) //check if move location is empty
+			if(SEPiece == null) //check if move location is empty
 			{
 				SECap = b.getPiece(r + 1, c - 1);
 				//check if NECap piece has different player
@@ -131,7 +121,7 @@ public class Validation {
 		if(r - 2 >= 0 && c + 2 < boundc)
 		{
 			SWPiece = b.getPiece(r - 2, c + 2);
-			if(SWPiece != null)
+			if(SWPiece == null)
 			{
 				SWCap = b.getPiece(r - 1, c + 1);
 				//check if SWCap piece has different player
@@ -144,7 +134,7 @@ public class Validation {
 		if(r + 2 < boundr && c + 2 < boundc)
 		{
 			NEPiece = b.getPiece(r + 2, c + 2);
-			if(NEPiece != null)
+			if(NEPiece == null)
 			{
 				NECap = b.getPiece(r + 1, c + 1);
 				//check if SECap piece has different player
