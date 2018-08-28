@@ -285,13 +285,10 @@ public class Validation {
 	{
 		int prow = p.getRow();
 		int pcol = p.getColumn();
-		//System.out.println(fromR + fromC + " " + toR + toC);
 		if(p.getName().equals("playerOne")) //their pieces go DOWN (aka + numbers)
 		{
 			if(!isJumpCoord(toR, toC, fromR, fromC) || fromR > toR) //if piece is not moving "down" (move is < current pos)
 			{
-				System.out.println("coord " + isJumpCoord(toR, toC, fromR, fromC));
-				System.out.println(fromR + "<" + toR);
 				return false;
 			}
 			//get the captured piece
@@ -299,12 +296,10 @@ public class Validation {
 			if(fromC < toC)
 			{
 				capture = b.getPiece(toR - 1, toC - 1);
-				System.out.println("cap " + capture);
 			}
 			else
 			{
 				capture = b.getPiece(toR - 1, toC + 1);
-				System.out.println("cap " + capture);
 			}
 			//check if capture piece is actually a player piece
 			if(capture == null)
@@ -320,7 +315,6 @@ public class Validation {
 			Piece jump = b.getPiece(toR, toC);
 			if(jump != null && jump != p)
 			{
-				System.out.println("empt");
 				return false;
 			}
 			return true;

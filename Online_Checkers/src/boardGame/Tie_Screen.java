@@ -10,9 +10,9 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class Win_Screen {
+public class Tie_Screen {
 
-	private JFrame frame;
+	JFrame frame;
 
 	/**
 	 * Launch the application.
@@ -21,7 +21,7 @@ public class Win_Screen {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Win_Screen window = new Win_Screen();
+					Tie_Screen window = new Tie_Screen();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -33,7 +33,7 @@ public class Win_Screen {
 	/**
 	 * Create the application.
 	 */
-	public Win_Screen() {
+	public Tie_Screen() {
 		initialize();
 	}
 
@@ -45,12 +45,12 @@ public class Win_Screen {
 		frame.setBounds(300, 0, 750, 625);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		//Game End Screen setup
-		JLabel win = new JLabel("");
-		win.setBounds(0, 0, 750, 603);
-		Image w = new ImageIcon(this.getClass().getResource("/win_screen.png")).getImage();
-		Image w1 = w.getScaledInstance(win.getWidth(), win.getHeight(), Image.SCALE_SMOOTH);
-		ImageIcon w2 = new ImageIcon(w1);
+		//Tie Screen setup
+		JLabel tie = new JLabel("");
+		tie.setBounds(0, 0, 750, 603);
+		Image t = new ImageIcon(this.getClass().getResource("/tie_screen.png")).getImage();
+		Image t1 = t.getScaledInstance(tie.getWidth(), tie.getHeight(), Image.SCALE_SMOOTH);
+		ImageIcon t2 = new ImageIcon(t1);
 		frame.getContentPane().setLayout(null);
 		
 		JButton btnPlayAgain = new JButton("");
@@ -88,9 +88,9 @@ public class Win_Screen {
 		btnQuitGame.setBorderPainted(false);
 		btnQuitGame.setBounds(289, 476, 171, 46);
 		frame.getContentPane().add(btnQuitGame);
-		win.setIcon(w2);
+		tie.setIcon(t2);
 		
-		frame.getContentPane().add(win);
+		frame.getContentPane().add(tie);
 	}
 
 }

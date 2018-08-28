@@ -16,8 +16,7 @@ import java.awt.Font;
 public class Login_Screen {
 
 	JFrame frame;
-	private JTextField txtHghs;
-
+	String name;
 	/**
 	 * Launch the login screen.
 	 */
@@ -65,6 +64,7 @@ public class Login_Screen {
 		JButton btnConfirm = new JButton("");
 		btnConfirm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				name = txtName.getText();
 				Main_Screen ms = new Main_Screen();
 				ms.frame.setVisible(true);
 				frame.dispose();

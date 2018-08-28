@@ -32,7 +32,6 @@ public class Board extends Observable implements Observer {
     private int placedRow = -1;
     private int placedCol = -1;
     private Piece selectedPiece = null;
-    private Piece selectedPiece2 = null;
     private int rows;
     private int columns;
     private int defaultSpeed = 10;

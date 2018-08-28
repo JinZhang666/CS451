@@ -7,23 +7,26 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JButton;
-import java.awt.BorderLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
+
 import java.awt.Font;
 
-public class Forfeited_Screen {
+public class Game_End_Screen {
 
 	JFrame frame;
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String args) {
+	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Forfeited_Screen window = new Forfeited_Screen("");
+					Game_End_Screen window = new Game_End_Screen("");
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -35,10 +38,9 @@ public class Forfeited_Screen {
 	/**
 	 * Create the application.
 	 */
-	public Forfeited_Screen(String p) {
+	public Game_End_Screen(String p) {
 		initialize(p);
 	}
-	
 
 	/**
 	 * Initialize the contents of the frame.
@@ -48,14 +50,33 @@ public class Forfeited_Screen {
 		frame.setBounds(300, 0, 750, 625);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		//Forfeited Screen setup
-		JLabel forfeit = new JLabel("");
-		forfeit.setBounds(0, 0, 750, 603);
-		Image f = new ImageIcon(this.getClass().getResource("/forfeit_screen.png")).getImage();
-		Image f1 = f.getScaledInstance(forfeit.getWidth(), forfeit.getHeight(), Image.SCALE_SMOOTH);
-		ImageIcon f2 = new ImageIcon(f1);
-		forfeit.setIcon(f2);
+		//Tie Screen setup
+		JLabel tie = new JLabel("");
+		tie.setBounds(0, 0, 750, 603);
+		Image t = new ImageIcon(this.getClass().getResource("/game_end_screen.png")).getImage();
+		Image t1 = t.getScaledInstance(tie.getWidth(), tie.getHeight(), Image.SCALE_SMOOTH);
+		ImageIcon t2 = new ImageIcon(t1);
 		frame.getContentPane().setLayout(null);
+		
+		JTextArea txtrCon = new JTextArea();
+		txtrCon.setFont(new Font("American Typewriter", Font.PLAIN, 35));
+		txtrCon.setOpaque(false);
+		txtrCon.setEditable(false);
+		txtrCon.setLineWrap(true);
+		txtrCon.setWrapStyleWord(true);
+		txtrCon.setText("Congratulations!");
+		txtrCon.setBounds(231, 238, 285, 46);
+		frame.getContentPane().add(txtrCon);
+		
+		JTextArea txtrName = new JTextArea();
+		txtrName.setText(p);
+		txtrName.setWrapStyleWord(true);
+		txtrName.setOpaque(false);
+		txtrName.setLineWrap(true);
+		txtrName.setEditable(false);
+		txtrName.setFont(new Font("American Typewriter", Font.PLAIN, 31));
+		txtrName.setBounds(241, 296, 277, 47);
+		frame.getContentPane().add(txtrName);
 		
 		JButton btnMainMenu = new JButton("");
 		btnMainMenu.addActionListener(new ActionListener() {
@@ -66,7 +87,8 @@ public class Forfeited_Screen {
 			}
 		});
 		btnMainMenu.setBorderPainted(false);
-		btnMainMenu.setBounds(277, 362, 193, 46);
+		btnMainMenu.setBounds(281, 365, 183, 48);
+		frame.getContentPane().add(btnMainMenu);
 		
 		JButton btnQuitGame = new JButton("");
 		btnQuitGame.addActionListener(new ActionListener() {
@@ -77,29 +99,11 @@ public class Forfeited_Screen {
 			}
 		});
 		btnQuitGame.setBorderPainted(false);
-		btnQuitGame.setBounds(277, 446, 193, 51);
-		
-		JTextArea txtrPlayer = new JTextArea();
-		txtrPlayer.setText(p);
-		txtrPlayer.setFont(new Font("American Typewriter", Font.PLAIN, 32));
-		txtrPlayer.setOpaque(false);
-		txtrPlayer.setLineWrap(true);
-		txtrPlayer.setWrapStyleWord(true);
-		txtrPlayer.setEditable(false);
-		txtrPlayer.setBounds(288, 249, 182, 43);
-		frame.getContentPane().add(txtrPlayer);
-		
-		JTextArea txtrForfeited = new JTextArea();
-		txtrForfeited.setText("Forfeited.");
-		txtrForfeited.setOpaque(false);
-		txtrForfeited.setWrapStyleWord(true);
-		txtrForfeited.setFont(new Font("American Typewriter", Font.PLAIN, 32));
-		txtrForfeited.setLineWrap(true);
-		txtrForfeited.setBounds(294, 304, 159, 46);
-		frame.getContentPane().add(txtrForfeited);
-		
-		frame.getContentPane().add(btnMainMenu);
+		btnQuitGame.setBounds(292, 448, 171, 46);
 		frame.getContentPane().add(btnQuitGame);
-		frame.getContentPane().add(forfeit);
+		tie.setIcon(t2);
+		
+		frame.getContentPane().add(tie);
 	}
+
 }
