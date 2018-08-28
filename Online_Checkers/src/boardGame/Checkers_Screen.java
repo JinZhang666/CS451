@@ -52,7 +52,8 @@ public class Checkers_Screen {
 	JPanel rightPanel = new JPanel();
 	Border lowerEtched = BorderFactory.createEtchedBorder(EtchedBorder.LOWERED);
 	JButton forfeitButton = new JButton("FORFEIT GAME");
-	JButton confirmButton = new JButton("CONFIRM");
+	JButton confirmButton = new JButton("CONFIRM MOVE");
+	JButton cancelButton = new JButton("CANCEL MOVE");
 	
 	static int currentPlayer = 1; // makes the Player One the player to start the game off
 	static boolean gameEnd = false;
@@ -232,23 +233,73 @@ public class Checkers_Screen {
 		
 		confirmButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				//remove captured piece
 				if(Validation.capture != null) {
 					mainBoard.remove(Validation.capture);
+	
+					//check if more jumps are available
+					if(mainBoard.getSelectedPiece().isRegularPiece()) {
+						if(toRow > 1 && toRow < 6) {
+							System.out.println("toRow " + toRow);
+							canMakeJump = Validation.canMakeJump(mainBoard.getSelectedPiece(), mainBoard, toRow, toCol);
+						}
+					}else if(mainBoard.getSelectedPiece().isKingPiece()) {
+						canMakeJump = Validation.canMakeKingJump(mainBoard.getSelectedPiece(), mainBoard, toRow, toCol);
+					}
 				}
 				Validation.capture = null;
 				
 				if(currentPlayer == 1) {
-					currentPlayer = 2;
-					playGame(currentPlayer);
-				}else {
-					currentPlayer = 1;
-					playGame(currentPlayer);
+					//check if piece can make move jumps
+					if(!canMakeJump) {
+						currentPlayer = 2;
+					}else {
+						System.out.print("More jumps are available with that same piece.");
+					}
+					//if player1 reached the opposite side it becomes king
+					if(toRow == 7) {
+						RoundKingPiece king = new RoundKingPiece(Color.red);
+						mainBoard.remove(mainBoard.getSelectedPiece());
+						mainBoard.place(king, toRow, toCol);
+						currentPlayer = 2;
+					}
+	
+				}else if(currentPlayer == 2){
+					//check if piece can make more jumps
+					if(!canMakeJump) {
+						currentPlayer = 1;
+					}else {
+						System.out.print("More jumps are available with that same piece.");
+					}
+					//if player2 reached the opposite side it becomes king
+					if(toRow == 0) {
+						RoundKingPiece king = new RoundKingPiece(Color.black);
+						mainBoard.remove(mainBoard.getSelectedPiece());
+						mainBoard.place(king, toRow, toCol);
+						currentPlayer = 1;
+					}
 				}
+				canMakeJump = false;
+				alreadyMoved = false;
+				playGame(currentPlayer);
 			}
 		});
 		
 		confirmButton.setFocusable(false);
 		rightPanel.add(confirmButton);
+		
+		//cancel move
+		cancelButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				alreadyMoved = false;
+				mainBoard.remove(mainBoard.getSelectedPiece());
+				mainBoard.place(mainBoard.getSelectedPiece(), tempRow, tempCol);
+				playGame(currentPlayer);
+			}
+		});
+		cancelButton.setFocusable(false);
+		rightPanel.add(cancelButton);
 		
 		frame.setVisible(true);
 	}
@@ -261,7 +312,11 @@ public class Checkers_Screen {
 	static int fromCol = -1;
 	static int toRow = -1;
 	static int toCol = -1;
+	static int tempRow = -1;
+	static int tempCol = -1;
+	static boolean alreadyMoved;
 	static boolean isValidMove;
+	static boolean canMakeJump;
 
 	/*
 	 * Check whether the move is valid and alternating between the two players
@@ -275,15 +330,23 @@ public class Checkers_Screen {
 				fromCol = mainBoard.getSelectedColumn();
 				toRow = mainBoard.getPlacedRow();
 				toCol = mainBoard.getPlacedColC();
+				tempRow = mainBoard.getSelectedRow();
+				tempCol = mainBoard.getSelectedColumn();
+
 				
 				isValidMove = Validation.isValidMove(mainBoard.getSelectedPiece(), mainBoard, fromRow, fromCol, toRow, toCol);
+				//System.out.println("jump " + canMakeJump);
+				//System.out.println("moved " + alreadyMoved);
 				
 				System.out.println(mainBoard.getSelectedPiece());
 				
-				if(!isValidMove) {
+				if(!isValidMove || alreadyMoved) {
 					//return piece to original square if move is not valid
 					mainBoard.remove(mainBoard.getSelectedPiece());
 					mainBoard.place(mainBoard.getSelectedPiece(), fromRow, fromCol);
+					alreadyMoved = false;
+				}else {
+					//alreadyMoved = true;
 				}
 		    }
 
