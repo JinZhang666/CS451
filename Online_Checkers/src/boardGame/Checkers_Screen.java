@@ -57,7 +57,7 @@ public class Checkers_Screen {
 	static int currentPlayer = 1; // makes the Player One the player to start the game off
 	static boolean gameEnd = false;
 	
-	public static void main(String args) {
+	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -232,6 +232,11 @@ public class Checkers_Screen {
 		
 		confirmButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(Validation.capture != null) {
+					mainBoard.remove(Validation.capture);
+				}
+				Validation.capture = null;
+				
 				if(currentPlayer == 1) {
 					currentPlayer = 2;
 					playGame(currentPlayer);
@@ -271,7 +276,7 @@ public class Checkers_Screen {
 				toRow = mainBoard.getPlacedRow();
 				toCol = mainBoard.getPlacedColC();
 				
-				isValidMove = Validation.isValidMove(mainBoard.getSelectedPiece(), mainBoard, fromRow, fromCol);
+				isValidMove = Validation.isValidMove(mainBoard.getSelectedPiece(), mainBoard, fromRow, fromCol, toRow, toCol);
 				
 				System.out.println(mainBoard.getSelectedPiece());
 				

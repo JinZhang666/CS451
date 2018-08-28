@@ -1,6 +1,7 @@
 package boardGame;
 
 public class Validation {
+	static Piece capture;
 	
 	public static boolean canMakeJump(Piece p, Board b)
 	{
@@ -146,7 +147,7 @@ public class Validation {
 		return false;
 
 	}
-	public static boolean isValidMove(Piece p, Board b, int r, int c)
+	public static boolean isValidMove(Piece p, Board b, int r, int c, int toR, int toC)
 	{
 		//check if entered values are fine
 		if(p == null || b == null || 0 > r || 0 > c || b.getColumns() < c || b.getRows() < r)
@@ -160,7 +161,7 @@ public class Validation {
 			{
 				return true;
 			}
-			else if(isValidRegularJump(p, b, r, c))
+			else if(isValidRegularJump(p, b, r, c, toR, toC))
 			{
 				return true;
 			}
@@ -216,7 +217,7 @@ public class Validation {
 		{
 			//check if move location is empty
 			Piece moveloc = b.getPiece(r, c);
-			if(moveloc != null)
+			if(moveloc != null && moveloc != p)
 			{
 				return false;
 			}
@@ -275,25 +276,30 @@ public class Validation {
 	 * REQUIRES: Board b != NULL, Piece p != NULL, mrow, mcol are within the bounds of the board.  
 	 * ENSURES: returns true if the move is a proper regular jump, otherwise, return false
 	 * */
-	public static boolean isValidRegularJump(Piece p, Board b, int r, int c)
+	public static boolean isValidRegularJump(Piece p, Board b, int fromR, int fromC, int toR, int toC)
 	{
 		int prow = p.getRow();
 		int pcol = p.getColumn();
+		//System.out.println(fromR + fromC + " " + toR + toC);
 		if(p.getName().equals("playerOne")) //their pieces go DOWN (aka + numbers)
 		{
-			if(!isJumpCoord(prow, pcol, r, c) || r < prow) //if piece is not moving "down" (move is < current pos)
+			if(!isJumpCoord(toR, toC, fromR, fromC) || fromR > toR) //if piece is not moving "down" (move is < current pos)
 			{
+				System.out.println("coord " + isJumpCoord(toR, toC, fromR, fromC));
+				System.out.println(fromR + "<" + toR);
 				return false;
 			}
 			//get the captured piece
-			Piece capture;
-			if(c > pcol)
+			//Piece capture;
+			if(fromC < toC)
 			{
-				capture = b.getPiece(r - 1, c - 1);
+				capture = b.getPiece(toR - 1, toC - 1);
+				System.out.println("cap " + capture);
 			}
 			else
 			{
-				capture = b.getPiece(r - 1, c + 1);
+				capture = b.getPiece(toR - 1, toC + 1);
+				System.out.println("cap " + capture);
 			}
 			//check if capture piece is actually a player piece
 			if(capture == null)
@@ -306,28 +312,30 @@ public class Validation {
 				return false;
 			}
 			//check if the piece on the board where the player will move is empty
-			Piece jump = b.getPiece(r, c);
-			if(jump != null)
+			Piece jump = b.getPiece(toR, toC);
+			if(jump != null && jump != p)
 			{
+				System.out.println("empt");
 				return false;
 			}
 			return true;
 		}
 		else if(p.getName().equals("playerTwo"))//player == playerTwo
 		{
-			if(!isJumpCoord(prow, pcol, r, c) ||r > prow) //if piece is not moving "up" (move is > current pos)
+			if(!isJumpCoord(toR, toC, fromR, fromC) ||fromR < toR) //if piece is not moving "up" (move is > current pos)
 			{
 				return false;
 			}
 			//get the captured piece
-			Piece capture;
-			if(c > pcol)
+			//Piece capture;
+			if(fromC > toC)
 			{
-				capture = b.getPiece(r + 1, c - 1);
+				capture = b.getPiece(toR + 1, fromC - 1);
+				
 			}
 			else
 			{
-				capture = b.getPiece(r + 1, c + 1);
+				capture = b.getPiece(toR + 1, fromC + 1);
 			}
 			//check if capture piece is actually a player piece
 			if(capture == null)
@@ -340,8 +348,8 @@ public class Validation {
 				return false;
 			}
 			//check if the piece on the board where the player will move is empty
-			Piece jump = b.getPiece(r, c);
-			if(jump != null)
+			Piece jump = b.getPiece(toR, toC);
+			if(jump != null && jump != p)
 			{
 				return false;
 			}
@@ -368,7 +376,7 @@ public class Validation {
 			return false;
 		}
 		//get captured piece
-		Piece capture;
+		//Piece capture;
 		if(r > prow && c > pcol)
 		{
 			capture = b.getPiece(r - 1, c - 1);
