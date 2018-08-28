@@ -22,24 +22,25 @@ public class Validation {
 			if(r - 2 >= 0 && c - 2 >= 0)
 			{
 				NWPiece = b.getPiece(r - 2, c - 2);
-				if(NWPiece != null) //check if move location is empty
+				System.out.println("The NW Piece: " +  NWPiece);
+				if(NWPiece == null) //check if move location is empty
 				{
 					NWCap = b.getPiece(r - 1, c - 1);
 					//check if NWcapture piece has different player
-					if(!NWCap.getName().equals(p.getName()))
+					if(NWCap != null && !NWCap.getName().equals(p.getName()))
 					{
 						return true;
 					}
 				}
 			}
-			if(r + 2 < boundr && c + 2 < boundc)
+			if(r - 2 < boundr && c + 2 < boundc)
 			{
-				NEPiece = b.getPiece(r + 2, c + 2);
-				if(NEPiece != null)
+				NEPiece = b.getPiece(r - 2, c + 2);
+				if(NEPiece == null)
 				{
-					NECap = b.getPiece(r + 1, c + 1);
+					NECap = b.getPiece(r - 1, c + 1);
 					//check if SECap piece has different player
-					if(!NECap.getName().equals(p.getName()))
+					if(NECap != null && !NECap.getName().equals(p.getName()))
 					{
 						return true;
 					}
@@ -48,14 +49,15 @@ public class Validation {
 		}
 		if(p.getName().equals("playerOne"))
 		{
-			if(r - 2 >= 0 && c + 2 < boundc)
+			if(r + 2 >= 0 && c + 2 < boundc)
 			{
-				SWPiece = b.getPiece(r - 2, c + 2);
-				if(SWPiece != null)
+				SWPiece = b.getPiece(r + 2, c + 2);
+				System.out.println("The SW Piece: " +  SWPiece);
+				if(SWPiece == null)
 				{
-					SWCap = b.getPiece(r - 1, c + 1);
+					SWCap = b.getPiece(r + 1, c + 1);
 					//check if SWCap piece has different player
-					if(!SWCap.getName().equals(p.getName()))
+					if(SWCap != null && !SWCap.getName().equals(p.getName()))
 					{
 						return true;
 					}
@@ -64,11 +66,11 @@ public class Validation {
 			if(r + 2 < boundr && c - 2 >= 0)
 			{
 				SEPiece = b.getPiece(r + 2, c - 2);
-				if(SEPiece != null) //check if move location is empty
+				if(SEPiece == null) //check if move location is empty
 				{
 					SECap = b.getPiece(r + 1, c - 1);
 					//check if NECap piece has different player
-					if(!SECap.getName().equals(p.getName()))
+					if(SECap != null && !SECap.getName().equals(p.getName()))
 					{
 						return true;
 					}
@@ -95,7 +97,7 @@ public class Validation {
 		if(r - 2 >= 0 && c - 2 >= 0)
 		{
 			NWPiece = b.getPiece(r - 2, c - 2);
-			if(NWPiece != null) //check if move location is empty
+			if(NWPiece == null) //check if move location is empty
 			{
 				NWCap = b.getPiece(r - 1, c - 1);
 				//check if NWcapture piece has different player
@@ -108,7 +110,7 @@ public class Validation {
 		if(r + 2 < boundr && c - 2 >= 0)
 		{
 			SEPiece = b.getPiece(r + 2, c - 2);
-			if(SEPiece != null) //check if move location is empty
+			if(SEPiece == null) //check if move location is empty
 			{
 				SECap = b.getPiece(r + 1, c - 1);
 				//check if NECap piece has different player
@@ -121,7 +123,7 @@ public class Validation {
 		if(r - 2 >= 0 && c + 2 < boundc)
 		{
 			SWPiece = b.getPiece(r - 2, c + 2);
-			if(SWPiece != null)
+			if(SWPiece == null)
 			{
 				SWCap = b.getPiece(r - 1, c + 1);
 				//check if SWCap piece has different player
@@ -134,7 +136,7 @@ public class Validation {
 		if(r + 2 < boundr && c + 2 < boundc)
 		{
 			NEPiece = b.getPiece(r + 2, c + 2);
-			if(NEPiece != null)
+			if(NEPiece == null)
 			{
 				NECap = b.getPiece(r + 1, c + 1);
 				//check if SECap piece has different player
@@ -154,7 +156,6 @@ public class Validation {
 		{
 			return false;
 		}
-		System.out.println(p.isKingPiece());
 		if(p.isRegularPiece())
 		{
 			if(isRegularMove(p, b, r, c))
@@ -200,6 +201,7 @@ public class Validation {
 	{
 		return (mrow == prow + 1 && mcol == pcol + 1) || (mrow == prow - 1 && mcol == pcol + 1) || (mrow == prow + 1 && mcol == pcol - 1) || (mrow == prow - 1 && mcol == pcol - 1);
 	}
+	
 	/*
 	 * isRegularMove: Piece * Board * int * int -> bool
 	 * REQUIRES: Piece != NULL, Board != NULL, move coordinates within bounds
@@ -217,7 +219,7 @@ public class Validation {
 		{
 			//check if move location is empty
 			Piece moveloc = b.getPiece(r, c);
-			if(moveloc != null && moveloc != p)
+			if(moveloc != null || moveloc == p)
 			{
 				return false;
 			}

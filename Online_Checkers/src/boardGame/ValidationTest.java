@@ -11,9 +11,8 @@ import org.junit.jupiter.api.Test;
 class ValidationTest {
 	Board mainBoard;
 	
-	@Before
-	void setBoard()
-	{
+	@Test
+	void testCanMakeJump() {
 		mainBoard = new Board(8, 8);
 		Piece[] playerOnePieces = new Piece[12];
 		Piece[] playerTwoPieces = new Piece[12];
@@ -29,8 +28,8 @@ class ValidationTest {
 		playerOnePieces[2].place(mainBoard, 0, 5); playerOnePieces[3].place(mainBoard, 0, 7);
 		playerOnePieces[4].place(mainBoard, 1, 0); playerOnePieces[5].place(mainBoard, 1, 2);
 		playerOnePieces[6].place(mainBoard, 1, 4); playerOnePieces[7].place(mainBoard, 1, 6);
-		playerOnePieces[8].place(mainBoard, 2, 1); playerOnePieces[9].place(mainBoard, 2, 3);//
-		playerOnePieces[10].place(mainBoard, 2, 5); playerOnePieces[11].place(mainBoard, 2, 7);//
+		playerOnePieces[8].place(mainBoard, 4, 1); playerOnePieces[9].place(mainBoard, 2, 3);//
+		playerOnePieces[10].place(mainBoard, 2, 4); playerOnePieces[11].place(mainBoard, 2, 7);//
 		
 		playerTwoPieces[0].place(mainBoard, 5, 0); playerTwoPieces[1].place(mainBoard, 5, 2);//
 		playerTwoPieces[2].place(mainBoard, 5, 4); playerTwoPieces[3].place(mainBoard, 5, 6);//
@@ -38,10 +37,12 @@ class ValidationTest {
 		playerTwoPieces[6].place(mainBoard, 6, 5); playerTwoPieces[7].place(mainBoard, 6, 7);
 		playerTwoPieces[8].place(mainBoard, 7, 0); playerTwoPieces[9].place(mainBoard, 7, 2);
 		playerTwoPieces[10].place(mainBoard, 7, 4); playerTwoPieces[11].place(mainBoard, 7, 6);
-	}
-	@Test
-	void testCanMakeJump() {
-		//fail("Not yet implemented");
+		boolean m1 = Validation.canMakeJump(mainBoard.getPiece(0, 1), mainBoard);
+		boolean m2 = Validation.canMakeJump(mainBoard.getPiece(5, 0), mainBoard);
+		
+		assertEquals("", false, m1);
+		assertEquals("", true, m2);
+		
 	}
 
 	@Test
@@ -148,12 +149,79 @@ class ValidationTest {
 
 	@Test
 	void testIsKingMove() {
-		//fail("Not yet implemented");
+		mainBoard = new Board(8, 8);
+		Piece[] playerOnePieces = new Piece[12];
+		Piece[] playerTwoPieces = new Piece[12];
+		for(int i = 0; i < 12; i++){
+			playerOnePieces[i] = new RoundKingPiece("playerOne", new Color(255, 255, 204));
+		}
+		for(int i = 0; i < 12; i++){
+			playerTwoPieces[i] = new RoundPiece("playerTwo", new Color(210, 180, 140));
+		}
+	
+		// Setting the Checkers pieces onto the board
+		playerOnePieces[0].place(mainBoard, 0, 1); playerOnePieces[1].place(mainBoard, 0, 3);
+		playerOnePieces[2].place(mainBoard, 0, 5); playerOnePieces[3].place(mainBoard, 0, 7);
+		playerOnePieces[4].place(mainBoard, 1, 0); playerOnePieces[5].place(mainBoard, 1, 2);
+		playerOnePieces[6].place(mainBoard, 1, 4); playerOnePieces[7].place(mainBoard, 1, 6);
+		playerOnePieces[8].place(mainBoard, 2, 1); playerOnePieces[9].place(mainBoard, 2, 3);//
+		playerOnePieces[10].place(mainBoard, 3, 4); playerOnePieces[11].place(mainBoard, 2, 7);//
+		
+		playerTwoPieces[0].place(mainBoard, 5, 0); playerTwoPieces[1].place(mainBoard, 5, 2);//
+		playerTwoPieces[2].place(mainBoard, 5, 4); playerTwoPieces[3].place(mainBoard, 5, 6);//
+		playerTwoPieces[4].place(mainBoard, 6, 1); playerTwoPieces[5].place(mainBoard, 6, 3);
+		playerTwoPieces[6].place(mainBoard, 6, 5); playerTwoPieces[7].place(mainBoard, 6, 7);
+		playerTwoPieces[8].place(mainBoard, 7, 0); playerTwoPieces[9].place(mainBoard, 7, 2);
+		playerTwoPieces[10].place(mainBoard, 7, 4); playerTwoPieces[11].place(mainBoard, 7, 6);
+		Piece p = mainBoard.getPiece(3,4);
+		
+		boolean a1 = Validation.isKingMove(p, mainBoard, 3, 5);
+		boolean a2 = Validation.isKingMove(p, mainBoard, 4, 5);//
+		boolean a3 = Validation.isKingMove(p, mainBoard, 2, 5);//
+		boolean a4 = Validation.isKingMove(p, mainBoard, 3, 4);
+		boolean a5 = Validation.isKingMove(p, mainBoard, 4, 4);
+		boolean a6 = Validation.isKingMove(p, mainBoard, 2, 4);
+		boolean a7 = Validation.isKingMove(p, mainBoard, 3, 3);
+		boolean a8 = Validation.isKingMove(p, mainBoard, 4, 3);//
+		boolean a9 = Validation.isKingMove(p, mainBoard, 2, 3);//
+		
+		assertEquals("Should not be valid move", false, a1);
+		assertEquals("Should not be valid move", true, a2);
+		assertEquals("Should not be valid move", true, a3);
+		assertEquals("Should not be valid move", false, a4);
+		assertEquals("Should not be valid move", false, a5);
+		assertEquals("Should not be valid move", false, a6);
+		assertEquals("Should not be valid move", false, a7);
+		assertEquals("Should not be valid move", true, a8);
+		assertEquals("Should not be valid move", false, a9);
 	}
 
 	@Test
 	void testIsValidRegularJump() {
-		//fail("Not yet implemented");
+		mainBoard = new Board(8, 8);
+		Piece[] playerOnePieces = new Piece[12];
+		Piece[] playerTwoPieces = new Piece[12];
+		for(int i = 0; i < 12; i++){
+			playerOnePieces[i] = new RoundKingPiece("playerOne", new Color(255, 255, 204));
+		}
+		for(int i = 0; i < 12; i++){
+			playerTwoPieces[i] = new RoundPiece("playerTwo", new Color(210, 180, 140));
+		}
+	
+		// Setting the Checkers pieces onto the board
+		playerOnePieces[0].place(mainBoard, 0, 1); playerOnePieces[1].place(mainBoard, 0, 3);
+		playerOnePieces[2].place(mainBoard, 0, 5); playerOnePieces[3].place(mainBoard, 0, 7);
+		playerOnePieces[4].place(mainBoard, 1, 0); playerOnePieces[5].place(mainBoard, 1, 2);
+		playerOnePieces[6].place(mainBoard, 1, 4); playerOnePieces[7].place(mainBoard, 1, 6);
+		playerOnePieces[8].place(mainBoard, 2, 1); playerOnePieces[9].place(mainBoard, 2, 3);//
+		playerOnePieces[10].place(mainBoard, 3, 4); playerOnePieces[11].place(mainBoard, 2, 7);//
+		
+		playerTwoPieces[0].place(mainBoard, 5, 0); playerTwoPieces[1].place(mainBoard, 5, 2);//
+		playerTwoPieces[2].place(mainBoard, 5, 4); playerTwoPieces[3].place(mainBoard, 5, 6);//
+		playerTwoPieces[4].place(mainBoard, 6, 1); playerTwoPieces[5].place(mainBoard, 6, 3);
+		playerTwoPieces[6].place(mainBoard, 6, 5); playerTwoPieces[7].place(mainBoard, 6, 7);
+		playerTwoPieces[8].place(mainBoard, 7, 0); playerTwoPieces[9].place(mainBoard, 7, 2);
+		playerTwoPieces[10].place(mainBoard, 7, 4); playerTwoPieces[11].place(mainBoard, 7, 6);
 	}
 
 	@Test
