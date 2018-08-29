@@ -17,6 +17,10 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
+
+import appwarp.WarpController;
+import appwarp.WarpListener;
+
 import java.awt.EventQueue;
 import java.awt.Color;
 import java.awt.Container;
@@ -34,7 +38,7 @@ import java.util.Observable;
 import java.util.Observer;
 import java.awt.Insets;
 
-public class Checkers_Screen {
+public class Checkers_Screen implements WarpListener {
 
 	static JFrame frame;
 	static Board mainBoard;
@@ -75,6 +79,7 @@ public class Checkers_Screen {
 		setUpBoard(mainBoard);
 		initialize();
 		playGame(currentPlayer);
+		WarpController.getInstance().setListener(this);
 	}
 	
 	public void setUpBoard(Board b){
@@ -385,10 +390,83 @@ public class Checkers_Screen {
 				}else {
 					//alreadyMoved = true;
 				}
-		    }
+
+			    
+							String player1PiecesInfo = "";
+							String player2PiecesInfo = "";
+						    for(int i = 0; i < 12; i++) {
+				
+						    	
+								   player1PiecesInfo += Integer.toString(playerOnePieces[i].getRow());
+								   player1PiecesInfo += Integer.toString(playerOnePieces[i].getColumn());
+								   player2PiecesInfo += Integer.toString(playerTwoPieces[i].getRow());
+								   player2PiecesInfo += Integer.toString(playerTwoPieces[i].getColumn());
+
+							}
+							System.out.println(player1PiecesInfo+ "||" + player2PiecesInfo);
+							String allPiecesInfo = player1PiecesInfo + "||" + player2PiecesInfo;
+					    	
+							try {
+					    		WarpController.getInstance().sendGameUpdate(allPiecesInfo);
+								} catch (Exception e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+						
+					        System.out.println("Get all the info after I action");	
+			
+			
+			
+			
+			}
 
 		});
 	}
+	
+    @Override
+	public void onWaitingStarted(String message) {
+    	
+    }
+	
+    @Override
+	public void onError(String message) {
+    
+    }
+	
+    @Override
+	public void onGameStarted(String message) {
+    	
+    }
+	
+    @Override
+	public void onGameFinished(int code, boolean isRemote) {
+    	
+    }
+	
+    //JIN
+    @Override
+	public void onGameUpdateReceived(String message) {
+    	System.out.println("checker_screen");
+    	System.out.println(message);
+    	String player1Pieces = message.substring(0, message.indexOf("||"));
+		String player2Pieces = message.substring(message.indexOf("||")+2, message.length());
+		System.out.println(player1Pieces);
+		System.out.println(player2Pieces);
+		
+		for(int i=0; i<24; i=i+2) {
+			mainBoard.remove(playerOnePieces[i/2]);
+			int currentPieceRow1 = Integer.parseInt(player1Pieces.substring(i,i+1));
+			//System.out.println("The player one piece #" + i + " row: " + currentPieceRow1);
+			int currentPieceColumn1 = Integer.parseInt(player1Pieces.substring(i+1,i+2));
+			//System.out.println("The player one piece #" + i + " column: " + currentPieceColumn1);
+			playerOnePieces[i/2].place(mainBoard, currentPieceRow1, currentPieceColumn1);
+			
+			mainBoard.remove(playerTwoPieces[i/2]);
+			int currentPieceRow2 = Integer.parseInt(player2Pieces.substring(i,i+1));
+			int currentPieceColumn2 = Integer.parseInt(player2Pieces.substring(i+1,i+2));
+			playerTwoPieces[i/2].place(mainBoard, currentPieceRow2, currentPieceColumn2);
+		}
+    }
 	
 	/*
 	 * Player 1 starts first 
