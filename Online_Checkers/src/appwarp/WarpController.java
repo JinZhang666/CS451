@@ -198,12 +198,13 @@ public class WarpController {
 	}
 	
 	public void onGameUpdateReceived(String message){
-//		log("onMoveUpdateReceived: message"+ message );
+    	log("onMoveUpdateReceived: message"+ message );
 		String userName = message.substring(0, message.indexOf("#@"));
 		String data = message.substring(message.indexOf("#@")+2, message.length());
-		if(!localUser.equals(userName)){
+		warpListener.onGameUpdateReceived(data);
+		/*if(!localUser.equals(userName)){
 			warpListener.onGameUpdateReceived(data);
-		}
+		}*/
 	}
 	
 	public void onResultUpdateReceived(String userName, int code){
