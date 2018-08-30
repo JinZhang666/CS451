@@ -6,7 +6,7 @@ Kim
 Cee Q. 
   -Windows /Menus
 Jin
-  -Music/Sound Effects
+  -Networking
 Michelle 
   -Move Validation
 
